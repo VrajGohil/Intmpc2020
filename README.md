@@ -1,4 +1,4 @@
-![GitHub followers](https://img.shields.io/github/followers/vrajgohil?label=Follow&style=social)
+![GitHub followers](https://img.shields.io/github/followers/vrajgohil?label=Follow&style=social) ![GitHub top language](https://img.shields.io/github/languages/top/vrajgohil/intmpc2020?style=for-the-badge)
 # INTMPC 2020
 
 International Macro Photography Contest
