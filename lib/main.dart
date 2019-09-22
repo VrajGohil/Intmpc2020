@@ -46,7 +46,7 @@ class HelloWorld extends StatelessWidget {
         color: Colors.blueAccent,
         child: Center(
           child: Text(
-            'Webite Under development.\nStay tuned!',
+            'Website Under development.\nStay tuned!',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 40,
