@@ -1,7 +1,8 @@
 steps:
   # Install
   - name: 'gcr.io/$PROJECT_ID/flutter'
-    args: ['build web']
+    entrypoint: '/bin/bash'
+    args: ['build.sh', '${_REPO_NAME}']
 
   - name: 'gcr.io/$PROJECT_ID/firebase'
     args: ['deploy']
