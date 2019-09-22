@@ -1,4 +1,4 @@
-![GitHub followers](https://img.shields.io/github/followers/vrajgohil?label=Follow&style=social) ![GitHub top language](https://img.shields.io/github/languages/top/vrajgohil/intmpc2020?style=for-the-badge)
+![GitHub followers](https://img.shields.io/github/followers/vrajgohil?label=Follow&style=social)   ![GitHub top language](https://img.shields.io/github/languages/top/vrajgohil/intmpc2020?style=for-the-badge)  [![Codemagic build status](https://api.codemagic.io/apps/5d86ee9fe941e000084c51ea/5d86ee9fe941e000084c51e9/status_badge.svg)](https://codemagic.io/apps/5d86ee9fe941e000084c51ea/5d86ee9fe941e000084c51e9/latest_build)
 # INTMPC 2020
 
 International Macro Photography Contest
