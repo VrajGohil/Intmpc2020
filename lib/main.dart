@@ -8,6 +8,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        // Define the default brightness and colors.
+        brightness: Brightness.dark,
+        primaryColor: Colors.black,
+        accentColor: Colors.grey,
+      ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.black,
@@ -53,7 +59,11 @@ class HomePage extends StatelessWidget {
                           //TODO: Add action here
                         },
                         backgroundColor: Colors.black,
-                        label: Text("Participate Now"),
+                        foregroundColor: Colors.white,
+                        label: Text(
+                          'Participate Now',
+                          style: TextStyle(fontFamily: 'George'),
+                        ),
                       ),
                     ],
                   ),
@@ -79,4 +89,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
