@@ -1,40 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends KFDrawerContent {
+  HomePage({
+    Key key,
+  });
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
   PageController _controller;
   bool isPlaying = false;
   @override
   void initState() {
     super.initState();
     _controller = PageController();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
   }
 
   @override
   void dispose() {
     super.dispose();
-    _animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    void _handleOnPressed() {
-      setState(() {
-        isPlaying = !isPlaying;
-        isPlaying
-            ? _animationController.forward()
-            : _animationController.reverse();
-      });
-    }
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -64,16 +56,15 @@ class _HomePageState extends State<HomePage>
                   ),
                   SafeArea(
                     child: Align(
-                      alignment: Alignment.topRight,
+                      alignment: Alignment.topLeft,
                       child: IconButton(
                         iconSize: 50,
-                        icon: AnimatedIcon(
-                          icon: AnimatedIcons.menu_close,
+                        icon: Icon(
+                          Icons.menu,
                           color: Colors.black,
                           size: 35.0,
-                          progress: _animationController,
                         ),
-                        onPressed: () => _handleOnPressed(),
+                      onPressed: widget.onMenuPressed,
                       ),
                     ),
                   ),
