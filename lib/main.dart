@@ -4,6 +4,7 @@ import 'package:intmpc/HomePage.dart';
 import 'package:animated_splash/animated_splash.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:intmpc/login.dart';
 
 void main() {
   runApp(
@@ -115,7 +116,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             Navigator.of(context).push(CupertinoPageRoute(
               fullscreenDialog: true,
               builder: (BuildContext context) {
-                return Text('hello');
+                return Login();
               },
             ));
           },
