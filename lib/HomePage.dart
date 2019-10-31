@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
+import 'package:intmpc/classes/custom_button.dart';
 
 class HomePage extends KFDrawerContent {
   HomePage({
@@ -27,7 +28,6 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -48,11 +48,16 @@ class _HomePageState extends State<HomePage>
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: IconButton(
-                        icon: Icon(
-                          Icons.keyboard_arrow_up,
-                          color: Colors.black,
-                        ),
-                        onPressed: () {}),
+                      icon: Icon(
+                        Icons.keyboard_arrow_up,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        _controller.nextPage(
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeInOut);
+                      },
+                    ),
                   ),
                   SafeArea(
                     child: Align(
@@ -64,7 +69,7 @@ class _HomePageState extends State<HomePage>
                           color: Colors.black,
                           size: 35.0,
                         ),
-                      onPressed: widget.onMenuPressed,
+                        onPressed: widget.onMenuPressed,
                       ),
                     ),
                   ),
@@ -79,16 +84,11 @@ class _HomePageState extends State<HomePage>
                         SizedBox(
                           height: 30.0,
                         ),
-                        FloatingActionButton.extended(
-                          onPressed: () {
-                            //TODO: Add action here
+                        CustomButton(
+                          text: 'Participate Now',
+                          method: () {
+                            print("Clicked on participate");
                           },
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
-                          label: Text(
-                            'Participate Now',
-                            style: TextStyle(fontFamily: 'George'),
-                          ),
                         ),
                       ],
                     ),

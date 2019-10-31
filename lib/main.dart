@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/HomePage.dart';
-import 'package:animated_splash/animated_splash.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:intmpc/login.dart';
 
@@ -15,29 +13,7 @@ void main() {
         accentColor: Colors.grey,
       ),
       debugShowCheckedModeBanner: false,
-      home: AnimatedSplash(
-        body: SizedBox(
-          width: 250.0,
-          child: FadeAnimatedTextKit(
-              onTap: () {
-                print("Tap Event");
-              },
-              text: [
-                "INTMPC 2020",
-              ],
-              textStyle: TextStyle(
-                  fontSize: 70.0,
-                  fontFamily: "George",
-                  color: Colors.black,
-              ),
-              textAlign: TextAlign.center,
-              alignment: AlignmentDirectional.topStart // or Alignment.topLeft
-          ),
-        ),
-        home: MainWidget(),
-        duration: 4000,
-        type: AnimatedSplashType.StaticDuration,
-      ),
+      home: MainWidget(),
     ),
   );
 }
