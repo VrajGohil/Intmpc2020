@@ -4,6 +4,8 @@ import 'package:intmpc/HomePage.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:intmpc/login.dart';
 
+import 'login_page.dart';
+
 void main() {
   runApp(
     MaterialApp(
@@ -92,7 +94,8 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             Navigator.of(context).push(CupertinoPageRoute(
               fullscreenDialog: true,
               builder: (BuildContext context) {
-                return Login();
+                return LoginPage();
+//                return Login();
               },
             ));
           },
