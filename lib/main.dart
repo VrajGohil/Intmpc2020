@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/HomePage.dart';
 import 'package:kf_drawer/kf_drawer.dart';
-import 'package:intmpc/login.dart';
-
 import 'login_page.dart';
 
 void main() {
@@ -65,16 +63,13 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: KFDrawer(
-//        borderRadius: 0.0,
-//        shadowBorderRadius: 0.0,
-//        menuPadding: EdgeInsets.all(0.0),
-//        scrollable: true,
         controller: _drawerController,
         header: Align(
           alignment: Alignment.centerLeft,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             width: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.height * 0.2,
             child: Image.asset(
               'assets/logo.png',
               alignment: Alignment.centerLeft,

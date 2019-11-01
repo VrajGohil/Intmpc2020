@@ -3,6 +3,8 @@ import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 import 'package:intmpc/classes/custom_button.dart';
 
+import 'classes/custom_page.dart';
+
 class HomePage extends KFDrawerContent {
   HomePage({
     Key key,
@@ -35,233 +37,97 @@ class _HomePageState extends State<HomePage>
           PageView(
             controller: _controller,
             children: <Widget>[
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/whiteBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/whiteBg.png'),
+                    fit: BoxFit.fill,
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.keyboard_arrow_up,
-                        color: Colors.black,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    SafeArea(
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: IconButton(
+                          iconSize: 50,
+                          icon: Icon(
+                            Icons.menu,
+                            color: Colors.black,
+                            size: 35.0,
+                          ),
+                          onPressed: widget.onMenuPressed,
+                        ),
                       ),
-                      onPressed: () {
-                        _controller.nextPage(
-                            duration: Duration(seconds: 1),
-                            curve: Curves.easeInOut);
-                      },
                     ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topLeft,
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            child: Image.asset('assets/logo.png'),
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            height: MediaQuery.of(context).size.height * 0.45,
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          CustomButton(
+                            text: 'Participate Now',
+                            method: () {
+                              print("Clicked on participate");
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
                       child: IconButton(
-                        iconSize: 50,
                         icon: Icon(
-                          Icons.menu,
+                          Icons.keyboard_arrow_up,
                           color: Colors.black,
-                          size: 35.0,
                         ),
-                        onPressed: widget.onMenuPressed,
+                        onPressed: () {
+                          _controller.nextPage(
+                              duration: Duration(seconds: 1),
+                              curve: Curves.easeInOut);
+                        },
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          child: Image.asset('assets/logo.png'),
-                          width: 600.0,
-                        ),
-                        SizedBox(
-                          height: 30.0,
-                        ),
-                        CustomButton(
-                          text: 'Participate Now',
-                          method: () {
-                            print("Clicked on participate");
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/blackBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'How To Enter',
-                          style: TextStyle(
-                            fontFamily: 'Brush',
-                            color: Colors.white,
-                            fontSize: 50.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              CustomPage(
+                title: 'How To Enter',
+                imagePath: 'assets/blackBg.png',
+                fontColor: Colors.white,
               ),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/whiteBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'Awards',
-                          style: TextStyle(
-                            fontFamily: 'Brush',
-                            color: Colors.black,
-                            fontSize: 50.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              CustomPage(
+                title: 'Awards',
+                imagePath: 'assets/whiteBg.png',
+                fontColor: Colors.black,
               ),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/blackBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'Host',
-                          style: TextStyle(
-                            fontFamily: 'Brush',
-                            color: Colors.white,
-                            fontSize: 50.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              CustomPage(
+                title: 'Host',
+                imagePath: 'assets/blackBg.png',
+                fontColor: Colors.white,
               ),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/whiteBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'Jury',
-                          style: TextStyle(
-                            fontFamily: 'Brush',
-                            color: Colors.black,
-                            fontSize: 50.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              CustomPage(
+                title: 'Jury',
+                imagePath: 'assets/whiteBg.png',
+                fontColor: Colors.black,
               ),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/blackBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'INTMPC\n  2018',
-                          style: TextStyle(
-                            fontFamily: 'Brush',
-                            color: Colors.white,
-                            fontSize: 50.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              CustomPage(
+                title: 'INTMPC\n  2018',
+                imagePath: 'assets/blackBg.png',
+                fontColor: Colors.white,
               ),
-              Stack(
-                children: <Widget>[
-                  Center(
-                    child: Image.asset(
-                      'assets/whiteBg.png',
-                      height: double.infinity,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  SafeArea(
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          'Contact',
-                          style: TextStyle(
-                            fontFamily: 'Brush',
-                            color: Colors.black,
-                            fontSize: 50.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              CustomPage(
+                title: 'Contact',
+                imagePath: 'assets/whiteBg.png',
+                fontColor: Colors.black,
               ),
             ],
             scrollDirection: Axis.vertical,
