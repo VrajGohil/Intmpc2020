@@ -291,23 +291,6 @@ class _LoginPageState extends State<LoginPage>
                   text: 'LOGIN',
                   method: () => showInSnackBar("Login button pressed"),
                 ),
-//                child: MaterialButton(
-//                    highlightColor: Colors.transparent,
-//                    splashColor: Colors.black,
-//                    //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-//                    child: Padding(
-//                      padding: const EdgeInsets.symmetric(
-//                          vertical: 10.0, horizontal: 42.0),
-//                      child: Text(
-//                        "LOGIN",
-//                        style: TextStyle(
-//                            color: Colors.white,
-//                            fontSize: 25.0,
-//                            fontFamily: "WorkSansBold"),
-//                      ),
-//                    ),
-//                    onPressed: () =>
-//                        showInSnackBar("Login button pressed")),
               ),
             ],
           ),
@@ -321,7 +304,7 @@ class _LoginPageState extends State<LoginPage>
                       decoration: TextDecoration.underline,
                       color: Colors.black,
                       fontSize: 16.0,
-                      fontFamily: "WorkSansMedium"),
+                      fontFamily: "George"),
                 )),
           ),
           Padding(
@@ -333,8 +316,8 @@ class _LoginPageState extends State<LoginPage>
                   decoration: BoxDecoration(
                     gradient: new LinearGradient(
                         colors: [
-                          Colors.white10,
-                          Colors.white,
+                          Colors.black12,
+                          Colors.black,
                         ],
                         begin: const FractionalOffset(0.0, 0.0),
                         end: const FractionalOffset(1.0, 1.0),
@@ -351,15 +334,15 @@ class _LoginPageState extends State<LoginPage>
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 16.0,
-                        fontFamily: "WorkSansMedium"),
+                        fontFamily: "George"),
                   ),
                 ),
                 Container(
                   decoration: BoxDecoration(
                     gradient: new LinearGradient(
                         colors: [
-                          Colors.white,
-                          Colors.white10,
+                          Colors.black,
+                          Colors.black12,
                         ],
                         begin: const FractionalOffset(0.0, 0.0),
                         end: const FractionalOffset(1.0, 1.0),
@@ -387,6 +370,23 @@ class _LoginPageState extends State<LoginPage>
                     ),
                     child: new Icon(
                       FontAwesomeIcons.facebookF,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 10.0, right: 40.0),
+                child: GestureDetector(
+                  onTap: () => showInSnackBar("Facebook button pressed"),
+                  child: Container(
+                    padding: const EdgeInsets.all(15.0),
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: new Icon(
+                      FontAwesomeIcons.twitter,
                       color: Colors.white,
                     ),
                   ),
