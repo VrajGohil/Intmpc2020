@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/HomePage.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'dashboard.dart';
 import 'login_page.dart';
 
 void main() {
@@ -13,7 +14,13 @@ void main() {
         accentColor: Colors.grey,
       ),
       debugShowCheckedModeBanner: false,
-      home: MainWidget(),
+      routes: {
+        '/' : (context) => MainWidget(),
+        '/login' : (context) => LoginPage(),
+        '/dashboard' : (context) => Dashboard(),
+      },
+      initialRoute: '/',
+//      home: MainWidget(),
     ),
   );
 }
@@ -86,13 +93,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).push(CupertinoPageRoute(
-              fullscreenDialog: true,
-              builder: (BuildContext context) {
-                return LoginPage();
-//                return Login();
-              },
-            ));
+            Navigator.pushNamed(context, '/login');
           },
         ),
         decoration: BoxDecoration(

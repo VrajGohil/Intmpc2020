@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage>
                           CustomButton(
                             text: 'Participate Now',
                             method: () {
-                              print("Clicked on participate");
+                              Navigator.pushNamed(context, '/dashboard');
                             },
                           ),
                         ],
