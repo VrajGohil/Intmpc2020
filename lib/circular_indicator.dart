@@ -252,7 +252,7 @@ class CirclePainter extends CustomPainter {
         this.maskFilter}) {
     _paintBackground.color = backgroundColor;
     _paintBackground.style = PaintingStyle.stroke;
-    _paintBackground.strokeWidth = lineWidth;
+    _paintBackground.strokeWidth = lineWidth/4;
 
     if (arcBackgroundColor != null) {
       _paintBackgroundStartAngle.color = arcBackgroundColor;

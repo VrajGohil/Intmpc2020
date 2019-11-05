@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intmpc/circular_indicator.dart';
-
 import 'classes/custom_button.dart';
 
+//TODO: Make List to add widgets to column.
 class Dashboard extends StatefulWidget {
   @override
   _DashboardState createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
-  double height = 1000;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: height,
+          height: 1000,//this is temporary
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/whiteBg.png'),
@@ -101,9 +100,10 @@ class _DashboardState extends State<Dashboard> {
                           padding: const EdgeInsets.all(20.0),
                           child: CircularPercentIndicator(
                             radius: 90.0,
-                            lineWidth: 5.0,
+                            lineWidth: 7.0,
                             animation: true,
                             percent: 0.5,
+                            circularStrokeCap: CircularStrokeCap.round,
                             footer: Text(
                               'Entries Submitted',
                               style: TextStyle(
@@ -155,6 +155,7 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                     ),
+                    //TODO: Change here
                     Container(
                       decoration: BoxDecoration(
                         gradient: new LinearGradient(
