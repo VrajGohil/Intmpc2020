@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "835829981827",
+    "firebase_url": "https://intmpc2020.firebaseio.com",
+    "project_id": "intmpc2020",
+    "storage_bucket": "intmpc2020.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835829981827:android:17780e9be3326e9d6831b6",
+        "android_client_info": {
+          "package_name": "co.intmpc2020.intmpc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835829981827-ftfnnfuu372t8s1t3ee97nta1e48ka1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCR_nN8GfAU_zlEkRWumAw_EsZz986nHIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835829981827-ftfnnfuu372t8s1t3ee97nta1e48ka1l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

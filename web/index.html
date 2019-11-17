@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>intmpc</title>
+  <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-analytics.js"></script>
+  <script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBZB5yczUS4CuXimrLI8kcMrV8JSshTqsw",
+    authDomain: "intmpc2020.firebaseapp.com",
+    databaseURL: "https://intmpc2020.firebaseio.com",
+    projectId: "intmpc2020",
+    storageBucket: "intmpc2020.appspot.com",
+    messagingSenderId: "835829981827",
+    appId: "1:835829981827:web:793b29ef0631e7ab6831b6",
+    measurementId: "G-D5ELHK9NLM"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  </script>
 </head>
 <body>
   <script src="main.dart.js" type="application/javascript"></script>

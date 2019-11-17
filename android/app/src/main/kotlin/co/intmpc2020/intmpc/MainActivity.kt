@@ -1,4 +1,4 @@
-package gq.intmpc.intmpc
+package co.intmpc2020.intmpc
 
 import android.os.Bundle
 
