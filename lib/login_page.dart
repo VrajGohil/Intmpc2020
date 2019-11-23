@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'bubble_indication_painter.dart';
 import 'classes/custom_button.dart';
+import 'classes/MyFirebaseAuth.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -39,6 +40,15 @@ class _LoginPageState extends State<LoginPage>
 
   Color left = Colors.black;
   Color right = Colors.white;
+
+  String loginEmail;
+  String loginPassword;
+  String newName;
+  String newEmail;
+  String newPassword;
+  String newConfirmationPassword;
+
+  MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -179,7 +189,6 @@ class _LoginPageState extends State<LoginPage>
                 ),
               ),
             ),
-            //Container(height: 33.0, width: 1.0, color: Colors.white),
             Expanded(
               child: FlatButton(
                 splashColor: Colors.transparent,
@@ -227,6 +236,9 @@ class _LoginPageState extends State<LoginPage>
                           focusNode: myFocusNodeEmailLogin,
                           controller: loginEmailController,
                           keyboardType: TextInputType.emailAddress,
+                          onChanged: (value){
+                            loginEmail = value;
+                          },
                           style: TextStyle(
                               fontFamily: "George",
                               fontSize: 16.0,
@@ -256,6 +268,9 @@ class _LoginPageState extends State<LoginPage>
                           focusNode: myFocusNodePasswordLogin,
                           controller: loginPasswordController,
                           obscureText: _obscureTextLogin,
+                          onChanged: (value){
+                            loginPassword = value;
+                          },
                           style: TextStyle(
                               fontFamily: "George",
                               fontSize: 16.0,
@@ -291,7 +306,11 @@ class _LoginPageState extends State<LoginPage>
                 margin: EdgeInsets.only(top: 170.0),
                 child: CustomButton(
                   text: 'LOGIN',
-                  method: () => showInSnackBar("Login button pressed"),
+                  method: () async{
+                    myFirebaseAuth.signInWithCredentials(loginEmail, loginPassword);
+                    print(await myFirebaseAuth.getUser());
+                    showInSnackBar("Login successful!");
+                  },
                 ),
               ),
             ],
@@ -397,7 +416,7 @@ class _LoginPageState extends State<LoginPage>
               Padding(
                 padding: EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
-                  onTap: () => showInSnackBar("Google button pressed"),
+                  onTap: () => myFirebaseAuth.signInWithGoogle(),
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
                     decoration: new BoxDecoration(
@@ -446,6 +465,9 @@ class _LoginPageState extends State<LoginPage>
                           controller: signupNameController,
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.words,
+                          onChanged: (value){
+                            newName = value;
+                          },
                           style: TextStyle(
                               fontFamily: "George",
                               fontSize: 16.0,
@@ -474,6 +496,9 @@ class _LoginPageState extends State<LoginPage>
                           focusNode: myFocusNodeEmail,
                           controller: signupEmailController,
                           keyboardType: TextInputType.emailAddress,
+                          onChanged: (value){
+                            newEmail = value;
+                          },
                           style: TextStyle(
                               fontFamily: "George",
                               fontSize: 16.0,
@@ -502,6 +527,9 @@ class _LoginPageState extends State<LoginPage>
                           focusNode: myFocusNodePassword,
                           controller: signupPasswordController,
                           obscureText: _obscureTextSignup,
+                          onChanged: (value){
+                            newPassword = value;
+                          },
                           style: TextStyle(
                               fontFamily: "George",
                               fontSize: 16.0,
@@ -539,6 +567,9 @@ class _LoginPageState extends State<LoginPage>
                         child: TextField(
                           controller: signupConfirmPasswordController,
                           obscureText: _obscureTextSignupConfirm,
+                          onChanged: (value){
+                            newConfirmationPassword = value;
+                          },
                           style: TextStyle(
                               fontFamily: "George",
                               fontSize: 16.0,
@@ -549,7 +580,7 @@ class _LoginPageState extends State<LoginPage>
                               FontAwesomeIcons.lock,
                               color: Colors.black,
                             ),
-                            hintText: "Confirmation",
+                            hintText: "Confirm Pass",
                             hintStyle: TextStyle(color: Colors.grey,
                                 fontFamily: "George", fontSize: 16.0),
                             suffixIcon: GestureDetector(
@@ -573,7 +604,10 @@ class _LoginPageState extends State<LoginPage>
                 margin: EdgeInsets.only(top: 340.0),
                 child: CustomButton(
                   text: 'SIGN UP',
-                  method: () => showInSnackBar("SignUp button pressed"),
+                  method: () {
+                    myFirebaseAuth.signUp(email: newEmail,password: newPassword);
+                    showInSnackBar("Signup successful!");
+                  },
                 ),
               ),
             ],
