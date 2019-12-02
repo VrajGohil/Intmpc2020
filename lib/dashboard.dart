@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intmpc/circular_indicator.dart';
 import 'classes/custom_button.dart';
+import 'classes/MyFirebaseAuth.dart';
+import 'package:firebase/firebase.dart' as fb;
 
 //TODO: Make List to add widgets to column.
 class Dashboard extends StatefulWidget {
@@ -9,13 +11,51 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  String userEmail;
+  double entries = 0 ;
+  var data;
+  String userName;
+  @override
+  void initState(){
+        getUserName();
+        print(userName);
+//    getUserName();
+//    for firestore
+//    fb.firestore().collection('users').add({
+//      'name': 'Vraj',
+//      'email': 'Vraj@intmpc2020.co'
+//    });
+    super.initState();
+  }
+
+  Future<void> getUserName() async {
+
+    MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
+    userEmail =await myFirebaseAuth.getUser();
+    if (userEmail == null){
+      Navigator.pop(context);
+    }
+    else{
+      data =await fb.firestore().collection('users').doc(userEmail).get().then((onValue){
+        return onValue.data();
+      });
+      setState(() {
+        print(data);
+        print(data['name']);
+        userName = data['name'];
+        entries = data['entries'];
+        print("Username is $userName");
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 1000,//this is temporary
+          height: 1000, //this is temporary
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/whiteBg.png'),
@@ -47,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
                             radius: 30.0,
                           ),
                           Text(
-                            'Welcome User!',
+                            'Welcome $userName!',
                             style: TextStyle(
                               fontFamily: 'George',
                               color: Colors.black,
@@ -102,7 +142,7 @@ class _DashboardState extends State<Dashboard> {
                             radius: 90.0,
                             lineWidth: 7.0,
                             animation: true,
-                            percent: 0.5,
+                            percent: entries/10,
                             circularStrokeCap: CircularStrokeCap.round,
                             footer: Text(
                               'Entries Submitted',
@@ -110,7 +150,7 @@ class _DashboardState extends State<Dashboard> {
                                   color: Colors.grey, fontFamily: 'George'),
                             ),
                             center: Text(
-                              "1",
+                              "$entries",
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 30.0,
