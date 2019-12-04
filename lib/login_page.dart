@@ -5,6 +5,7 @@ import 'bubble_indication_painter.dart';
 import 'classes/custom_button.dart';
 import 'classes/MyFirebaseAuth.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -30,6 +31,7 @@ class _LoginPageState extends State<LoginPage>
   bool _obscureTextLogin = true;
   bool _obscureTextSignup = true;
   bool _obscureTextSignupConfirm = true;
+  bool isLoading = false;
 
   TextEditingController signupEmailController = new TextEditingController();
   TextEditingController signupNameController = new TextEditingController();
@@ -55,68 +57,71 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     return new Scaffold(
       key: _scaffoldKey,
-      body: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overscroll) {
-          overscroll.disallowGlow();
-        },
-        child: SingleChildScrollView(
-          child: SafeArea(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height >= 775.0
-                  ? MediaQuery.of(context).size.height
-                  : 775.0,
-              decoration: new BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/whiteBg.png'),
-                  fit: BoxFit.cover,
+      body: ModalProgressHUD(
+        inAsyncCall: isLoading,
+        child: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (overscroll) {
+            overscroll.disallowGlow();
+          },
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height >= 775.0
+                    ? MediaQuery.of(context).size.height
+                    : 775.0,
+                decoration: new BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/whiteBg.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: new Image(
-                        width: 230.0,
-                        height: 171.0,
-                        fit: BoxFit.fill,
-                        image: new AssetImage('assets/logo.png')),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child: _buildMenuBar(context),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: PageView(
-                      controller: _pageController,
-                      onPageChanged: (i) {
-                        if (i == 0) {
-                          setState(() {
-                            right = Colors.white;
-                            left = Colors.black;
-                          });
-                        } else if (i == 1) {
-                          setState(() {
-                            right = Colors.black;
-                            left = Colors.white;
-                          });
-                        }
-                      },
-                      children: <Widget>[
-                        new ConstrainedBox(
-                          constraints: const BoxConstraints.expand(),
-                          child: _buildSignIn(context),
-                        ),
-                        new ConstrainedBox(
-                          constraints: const BoxConstraints.expand(),
-                          child: _buildSignUp(context),
-                        ),
-                      ],
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: new Image(
+                          width: 230.0,
+                          height: 171.0,
+                          fit: BoxFit.fill,
+                          image: new AssetImage('assets/logo.png')),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: _buildMenuBar(context),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: PageView(
+                        controller: _pageController,
+                        onPageChanged: (i) {
+                          if (i == 0) {
+                            setState(() {
+                              right = Colors.white;
+                              left = Colors.black;
+                            });
+                          } else if (i == 1) {
+                            setState(() {
+                              right = Colors.black;
+                              left = Colors.white;
+                            });
+                          }
+                        },
+                        children: <Widget>[
+                          new ConstrainedBox(
+                            constraints: const BoxConstraints.expand(),
+                            child: _buildSignIn(context),
+                          ),
+                          new ConstrainedBox(
+                            constraints: const BoxConstraints.expand(),
+                            child: _buildSignUp(context),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -156,7 +161,7 @@ class _LoginPageState extends State<LoginPage>
         style: TextStyle(
             color: Colors.white, fontSize: 16.0, fontFamily: "George"),
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.black,
       duration: Duration(seconds: 3),
     ));
   }
@@ -306,16 +311,40 @@ class _LoginPageState extends State<LoginPage>
                 child: CustomButton(
                   text: 'LOGIN',
                   method: () async {
-                    myFirebaseAuth.signInWithCredentials(
-                        loginEmail, loginPassword);
-                    print(await myFirebaseAuth.getUser());
-                    if (myFirebaseAuth.getUser() != null) {
-                      showInSnackBar("Login successful!");
-                      Navigator.pushNamed(context, '/dashboard');
-//                    Navigator
-                    } else {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    try {
+                      await myFirebaseAuth.signInWithCredentials(
+                          loginEmail, loginPassword);
+                      if (await myFirebaseAuth.getUser() != null) {
+                        Navigator.pushNamed(context, '/dashboard');
+                      }
+                      setState(() {
+                        isLoading = false;
+                      });
+                    } catch (e) {
+                      print(e);
                       showInSnackBar("Email or Password incorrect!");
+                      setState(() {
+                        isLoading = false;
+                      });
                     }
+//                    setState(() {
+//                      isLoading = true;
+//                    });
+//                    myFirebaseAuth.signInWithCredentials(
+//                        loginEmail, loginPassword);
+//                    setState(() {
+//                      isLoading = false;
+//                    });
+//                    print(await myFirebaseAuth.getUser());
+//                    if (myFirebaseAuth.getUser() != null) {
+//                      showInSnackBar("Login successful!");
+//                      Navigator.pushNamed(context, '/dashboard');
+//                    } else {
+//                      showInSnackBar("Email or Password incorrect!");
+//                    }
                   },
                 ),
               ),
@@ -617,21 +646,57 @@ class _LoginPageState extends State<LoginPage>
               Container(
                 margin: EdgeInsets.only(top: 340.0),
                 child: CustomButton(
-                  text: 'SIGN UP',
-                  method: () {
-                    if (newPassword != newConfirmationPassword) {
-                      showInSnackBar("Password does not match");
-                    } else {
-                      fb
-                          .firestore()
-                          .collection('users')
-                          .doc(newEmail)
-                          .set({'name': newName, 'entries': 3});
-                      myFirebaseAuth.signUp(
-                          email: newEmail, password: newPassword);
+                    text: 'SIGN UP',
+                    method: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      if (newPassword != newConfirmationPassword) {
+                        showInSnackBar("Password does not match");
+                        isLoading = false;
+                      } else if (newName != null &&
+                          newEmail != null &&
+                          newPassword != null) {
+                        try {
+                          await fb
+                              .firestore()
+                              .collection('users')
+                              .doc(newEmail)
+                              .set({'name': newName, 'entries': 3});
+                          await myFirebaseAuth.signUp(
+                              email: newEmail, password: newPassword);
+                          if (await myFirebaseAuth.getUser() != null) {
+                            Navigator.pushNamed(context, '/dashboard');
+                          }
+                          setState(() {
+                            isLoading = false;
+                          });
+                        } catch (e) {
+                          print(e);
+                          showInSnackBar("Please check the details");
+                          setState(() {
+                            isLoading = false;
+                          });
+                        }
+                      }
+                      else{
+                        isLoading = false;
+                        showInSnackBar('Please enter all details');
+                      }
                     }
-                  },
-                ),
+//                    if (newPassword != newConfirmationPassword) {
+//                      showInSnackBar("Password does not match");
+//                    } else {
+//                      fb
+//                          .firestore()
+//                          .collection('users')
+//                          .doc(newEmail)
+//                          .set({'name': newName, 'entries': 3});
+//                      myFirebaseAuth.signUp(
+//                          email: newEmail, password: newPassword);
+//                    }
+//                  },
+                    ),
               ),
             ],
           ),

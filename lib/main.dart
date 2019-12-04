@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/HomePage.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'classes/MyFirebaseAuth.dart';
 import 'dashboard.dart';
 import 'login_page.dart';
 
@@ -35,9 +36,22 @@ class MainWidget extends StatefulWidget {
 
 class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   KFDrawerController _drawerController;
+  String signIn = 'SIGN IN';
+  MyFirebaseAuth myFirebaseAuth;
+
+  Future<void> getSignIn() async {
+    myFirebaseAuth = MyFirebaseAuth();
+    String userEmail = await myFirebaseAuth.getUser();
+    if (userEmail != null){
+      setState(() {
+        signIn = 'SIGN OUT';
+      });
+    }
+  }
 
   @override
   void initState() {
+    getSignIn();
     super.initState();
     _drawerController = KFDrawerController(
       initialPage: HomePage(),
@@ -85,7 +99,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         footer: KFDrawerItem(
           text: Text(
-            'SIGN IN',
+            signIn,
             style: TextStyle(color: Colors.white),
           ),
           icon: Icon(
@@ -93,7 +107,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/login');
+            if(signIn == 'SIGN OUT'){
+              myFirebaseAuth.signOut();
+              setState(() {
+                signIn = 'SIGN IN';
+              });
+            }
+            else{
+              Navigator.pushNamed(context, '/login');
+            }
           },
         ),
         decoration: BoxDecoration(
