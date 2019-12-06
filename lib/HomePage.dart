@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 import 'package:intmpc/classes/custom_button.dart';
-
+import 'classes/circledp.dart';
 import 'classes/custom_page.dart';
 
 class HomePage extends KFDrawerContent {
@@ -127,6 +127,131 @@ class _HomePageState extends State<HomePage>
                 title: 'Jury',
                 imagePath: 'assets/whiteBg.png',
                 fontColor: Colors.black,
+                body: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge1',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'George',
+                          ),
+                          ),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge4',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge7',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge2',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge5',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge8',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge10',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge3',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge6',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        Container(
+                          child: Text('Judge9',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               CustomPage(
                 title: 'INTMPC\n  2018',
@@ -162,3 +287,4 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
+
