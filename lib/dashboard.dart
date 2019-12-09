@@ -12,13 +12,14 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   String userEmail;
-  double entries = 0 ;
+  double entries = 0;
+  int userImage = 0;
   var data;
   String userName;
   @override
-  void initState(){
-        getUserName();
-        print(userName);
+  void initState() {
+    getUserName();
+    print(userName);
 //    getUserName();
 //    for firestore
 //    fb.firestore().collection('users').add({
@@ -29,14 +30,17 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> getUserName() async {
-
     MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
-    userEmail =await myFirebaseAuth.getUser();
-    if (userEmail == null){
+    userEmail = await myFirebaseAuth.getUser();
+    if (userEmail == null) {
       Navigator.pop(context);
-    }
-    else{
-      data =await fb.firestore().collection('users').doc(userEmail).get().then((onValue){
+    } else {
+      data = await fb
+          .firestore()
+          .collection('users')
+          .doc(userEmail)
+          .get()
+          .then((onValue) {
         return onValue.data();
       });
       setState(() {
@@ -44,6 +48,7 @@ class _DashboardState extends State<Dashboard> {
         print(data['name']);
         userName = data['name'];
         entries = data['entries'];
+        userImage = data['dp'];
         print("Username is $userName");
       });
     }
@@ -84,6 +89,9 @@ class _DashboardState extends State<Dashboard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              "https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/$userImage.png?alt=media",
+                            ),
                             radius: 30.0,
                           ),
                           Text(
@@ -142,7 +150,7 @@ class _DashboardState extends State<Dashboard> {
                             radius: 90.0,
                             lineWidth: 7.0,
                             animation: true,
-                            percent: entries/10,
+                            percent: entries / 10,
                             circularStrokeCap: CircularStrokeCap.round,
                             footer: Text(
                               'Entries Submitted',

@@ -4,7 +4,6 @@ import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 import 'package:intmpc/classes/custom_button.dart';
 import 'classes/circledp.dart';
 import 'classes/custom_page.dart';
-import 'classes/naming.dart';
 
 class HomePage extends KFDrawerContent {
   HomePage({
@@ -133,73 +132,53 @@ class _HomePageState extends State<HomePage>
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Circledp(
-                          imagesrc: 'assets/alina.jpg',
+                        CircleDp(
+                          address: 'assets/alina.jpg',
+                          name: 'Alina Dotsenko',
                         ),
-                        naming(
-                          judgename: 'Alina Dotsenko',
+                        CircleDp(
+                          address: 'assets/muhammad.jpg',
+                          name: 'Muhammad Otib',
                         ),
-                        Circledp(
-                          imagesrc: 'assets/muhammad.jpg',
-                        ),
-                        naming(
-                          judgename: 'Muhammad Otib',
-                        ),
-                        Circledp(
-                          imagesrc: 'assets/tapan.jpg',
-                        ),
-                        naming(
-                          judgename: 'Tapan Sheth',
+                        CircleDp(
+                          address: 'assets/tapan.jpg',
+                          name: 'Tapan Sheth',
                         ),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Circledp(
-                          imagesrc: 'assets/bill.jpg',
+                        CircleDp(
+                          address: 'assets/bill.jpg',
+                          name: 'Dr. Bill Chu',
                         ),
-                        naming(
-                          judgename: 'Dr. Bill Chu',
+                        CircleDp(
+                          address: 'assets/peter.jpg',
+                          name: 'Peter Wyss',
                         ),
-                        Circledp(
-                          imagesrc: 'assets/peter.jpg',
+                        CircleDp(
+                          address: 'assets/thamaphon.jpg',
+                          name: 'Thamaphon Suwankosai',
                         ),
-                        naming(
-                          judgename: 'Peter Wyss',
-                        ),
-                        Circledp(
-                          imagesrc: 'assets/thamaphon.jpg',
-                        ),
-                        naming(
-                          judgename: 'Thamaphon Suwankosai',
-                        ),
-                        Circledp(
-                          imagesrc: 'assets/yan.jpg',
-                        ),
-                        naming(
-                          judgename: 'Yan Hidayat',
+                        CircleDp(
+                          address: 'assets/yan.jpg',
+                          name: 'Yan Hidayat',
                         ),
                       ],
                     ),
                     Column(
                       children: <Widget>[
-                        Circledp(
-                          imagesrc: 'assets/logo.png',
+                        CircleDp(
+                          address: 'assets/logo.png',
+                          name: 'Karen Webster',
                         ),
-                        naming(
-                          judgename: 'Karen Webster',
+                        CircleDp(
+                          address: 'assets/raj.jpg',
+                          name: 'Raj Bheda',
                         ),
-                        Circledp(
-                          imagesrc: 'assets/raj.jpg',
-                        ),
-                        naming(
-                          judgename: 'Raj Bheda',
-                        ),
-                        Circledp(
-                          imagesrc: 'assets/vraj.jpg',
-                        ),
-                        naming(
-                          judgename: 'Vraj Gohil',
+                        CircleDp(
+                          address: 'assets/vraj.jpg',
+                          name: 'Vraj Gohil',
                         ),
                       ],
                     ),

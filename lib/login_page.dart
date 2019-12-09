@@ -6,6 +6,7 @@ import 'classes/custom_button.dart';
 import 'classes/MyFirebaseAuth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'dart:math';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -657,12 +658,13 @@ class _LoginPageState extends State<LoginPage>
                       } else if (newName != null &&
                           newEmail != null &&
                           newPassword != null) {
+                        int userImage = Random().nextInt(9);
                         try {
                           await fb
                               .firestore()
                               .collection('users')
                               .doc(newEmail)
-                              .set({'name': newName, 'entries': 3});
+                              .set({'name': newName, 'entries': 3, 'dp': userImage});
                           await myFirebaseAuth.signUp(
                               email: newEmail, password: newPassword);
                           if (await myFirebaseAuth.getUser() != null) {
