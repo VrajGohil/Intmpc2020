@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 import 'package:intmpc/classes/custom_button.dart';
-
+import 'classes/circledp.dart';
 import 'classes/custom_page.dart';
+import 'classes/naming.dart';
 
 class HomePage extends KFDrawerContent {
   HomePage({
@@ -127,6 +128,83 @@ class _HomePageState extends State<HomePage>
                 title: 'Jury',
                 imagePath: 'assets/whiteBg.png',
                 fontColor: Colors.black,
+                body: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        Circledp(
+                          imagesrc: 'assets/alina.jpg',
+                        ),
+                        naming(
+                          judgename: 'Alina Dotsenko',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/muhammad.jpg',
+                        ),
+                        naming(
+                          judgename: 'Muhammad Otib',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/tapan.jpg',
+                        ),
+                        naming(
+                          judgename: 'Tapan Sheth',
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Circledp(
+                          imagesrc: 'assets/bill.jpg',
+                        ),
+                        naming(
+                          judgename: 'Dr. Bill Chu',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/peter.jpg',
+                        ),
+                        naming(
+                          judgename: 'Peter Wyss',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/thamaphon.jpg',
+                        ),
+                        naming(
+                          judgename: 'Thamaphon Suwankosai',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/yan.jpg',
+                        ),
+                        naming(
+                          judgename: 'Yan Hidayat',
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: <Widget>[
+                        Circledp(
+                          imagesrc: 'assets/logo.png',
+                        ),
+                        naming(
+                          judgename: 'Karen Webster',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/raj.jpg',
+                        ),
+                        naming(
+                          judgename: 'Raj Bheda',
+                        ),
+                        Circledp(
+                          imagesrc: 'assets/vraj.jpg',
+                        ),
+                        naming(
+                          judgename: 'Vraj Gohil',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               CustomPage(
                 title: 'INTMPC\n  2018',
@@ -162,3 +240,5 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
+
+
