@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/HomePage.dart';
 import 'package:kf_drawer/kf_drawer.dart';
-import 'classes/MyFirebaseAuth.dart';
 import 'dashboard.dart';
 import 'login_page.dart';
 
@@ -37,11 +37,10 @@ class MainWidget extends StatefulWidget {
 class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   KFDrawerController _drawerController;
   String signIn = 'SIGN IN';
-  MyFirebaseAuth myFirebaseAuth;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> getSignIn() async {
-    myFirebaseAuth = MyFirebaseAuth();
-    String userEmail = await myFirebaseAuth.getUser();
+    String userEmail = (await _auth.currentUser()).email;
     if (userEmail != null){
       setState(() {
         signIn = 'SIGN OUT';
@@ -108,7 +107,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           ),
           onPressed: () {
             if(signIn == 'SIGN OUT'){
-              myFirebaseAuth.signOut();
+              _auth.signOut();
               setState(() {
                 signIn = 'SIGN IN';
               });

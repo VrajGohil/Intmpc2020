@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'bubble_indication_painter.dart';
 import 'classes/custom_button.dart';
-import 'classes/MyFirebaseAuth.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:math';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -52,7 +53,9 @@ class _LoginPageState extends State<LoginPage>
   String newPassword;
   String newConfirmationPassword;
 
-  MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+//  MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -316,9 +319,10 @@ class _LoginPageState extends State<LoginPage>
                       isLoading = true;
                     });
                     try {
-                      await myFirebaseAuth.signInWithCredentials(
-                          loginEmail, loginPassword);
-                      if (await myFirebaseAuth.getUser() != null) {
+//                      await myFirebaseAuth.signInWithCredentials(
+//                          loginEmail, loginPassword);
+                      final FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: loginEmail, password: loginPassword)).user;
+                      if (user.email != null) {
                         Navigator.pushNamed(context, '/dashboard');
                       }
                       setState(() {
@@ -452,7 +456,7 @@ class _LoginPageState extends State<LoginPage>
               Padding(
                 padding: EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
-                  onTap: () => myFirebaseAuth.signInWithGoogle(),
+//                  onTap: () => myFirebaseAuth.signInWithGoogle(),
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
                     decoration: new BoxDecoration(
@@ -660,14 +664,15 @@ class _LoginPageState extends State<LoginPage>
                           newPassword != null) {
                         int userImage = Random().nextInt(9);
                         try {
-                          await fb
-                              .firestore()
-                              .collection('users')
-                              .doc(newEmail)
-                              .set({'name': newName, 'entries': 3, 'dp': userImage});
-                          await myFirebaseAuth.signUp(
-                              email: newEmail, password: newPassword);
-                          if (await myFirebaseAuth.getUser() != null) {
+//                          await myFirebaseAuth.signUp(
+//                              email: newEmail, password: newPassword);
+                          final FirebaseUser newUser = (await _auth.createUserWithEmailAndPassword(email: newEmail, password: newPassword)).user;
+                          if (newUser.email != null) {
+                            await fb
+                                .firestore()
+                                .collection('users')
+                                .doc(newEmail)
+                                .set({'name': newName, 'entries': 3, 'dp': userImage});
                             Navigator.pushNamed(context, '/dashboard');
                           }
                           setState(() {
@@ -675,7 +680,7 @@ class _LoginPageState extends State<LoginPage>
                           });
                         } catch (e) {
                           print(e);
-                          showInSnackBar("Please check the details");
+                          showInSnackBar("Invalid details");
                           setState(() {
                             isLoading = false;
                           });

@@ -1,8 +1,11 @@
+import 'dart:async';
+import 'dart:html';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/circular_indicator.dart';
 import 'classes/custom_button.dart';
-import 'classes/MyFirebaseAuth.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'package:flutter_web_image_picker/flutter_web_image_picker.dart';
 
 //TODO: Make List to add widgets to column.
 class Dashboard extends StatefulWidget {
@@ -16,6 +19,7 @@ class _DashboardState extends State<Dashboard> {
   int userImage = 0;
   var data;
   String userName;
+  Image image;
   @override
   void initState() {
     getUserName();
@@ -29,11 +33,61 @@ class _DashboardState extends State<Dashboard> {
     super.initState();
   }
 
+  Future<void> getImage() async {
+    var tempImage = await FlutterWebImagePicker.getImage;
+    setState(() {
+      image = tempImage;
+    });
+  }
+
+  Future<void> uploadImage() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Let\'s Upload',
+            style: TextStyle(color: Colors.black, fontFamily: 'George'),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          backgroundColor: Colors.white,
+          content: Center(
+              child: image != null
+                  ? image
+                  : Text(
+                      'No images selected',
+                      style: TextStyle(color: Colors.black),
+                    )),
+          actions: <Widget>[
+            CustomButton(
+              text: 'Cancel',
+              method: (){
+                Navigator.of(context).pop();
+              },
+            ),
+            CustomButton(
+              text: 'Upload',
+              method: () async {
+                await fb.storage().ref().child('images/$userEmail+$entries').put(image);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> getUserName() async {
-    MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
-    userEmail = await myFirebaseAuth.getUser();
+//    MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
+//    userEmail = await myFirebaseAuth.getUser();
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    userEmail = (await _auth.currentUser()).email;
     if (userEmail == null) {
-      Navigator.pop(context);
+      Navigator.pushNamed(context, '/login');
     } else {
       data = await fb
           .firestore()
@@ -140,6 +194,10 @@ class _DashboardState extends State<Dashboard> {
                               ),
                               CustomButton(
                                 text: 'SUBMIT',
+                                method: () async {
+                                  await getImage();
+                                  uploadImage();
+                                },
                               ),
                             ],
                           ),
