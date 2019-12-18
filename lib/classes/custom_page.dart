@@ -32,7 +32,7 @@ class CustomPage extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Brush',
                     color: fontColor,
-                    fontSize: 45.0,
+                    fontSize: 42.0,
                   ),
                 ),
               ),

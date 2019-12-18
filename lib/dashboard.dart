@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/circular_indicator.dart';
@@ -82,8 +81,6 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> getUserName() async {
-//    MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
-//    userEmail = await myFirebaseAuth.getUser();
     FirebaseAuth _auth = FirebaseAuth.instance;
     userEmail = (await _auth.currentUser()).email;
     if (userEmail == null) {

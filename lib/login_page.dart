@@ -8,7 +8,6 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -55,8 +54,6 @@ class _LoginPageState extends State<LoginPage>
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-//  MyFirebaseAuth myFirebaseAuth = MyFirebaseAuth();
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -74,12 +71,13 @@ class _LoginPageState extends State<LoginPage>
                 height: MediaQuery.of(context).size.height >= 775.0
                     ? MediaQuery.of(context).size.height
                     : 775.0,
-                decoration: new BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/whiteBg.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+//                decoration: BoxDecoration(
+//                  image: DecorationImage(
+//                    image: AssetImage('assets/whiteBg.png'),
+//                    fit: BoxFit.cover,
+//                  ),
+//                ),
+                color: Colors.grey[100],
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
@@ -229,6 +227,12 @@ class _LoginPageState extends State<LoginPage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/whiteBg.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   width: 300.0,
                   height: 190.0,
                   child: Column(
@@ -319,9 +323,10 @@ class _LoginPageState extends State<LoginPage>
                       isLoading = true;
                     });
                     try {
-//                      await myFirebaseAuth.signInWithCredentials(
-//                          loginEmail, loginPassword);
-                      final FirebaseUser user = (await _auth.signInWithEmailAndPassword(email: loginEmail, password: loginPassword)).user;
+                      final FirebaseUser user =
+                          (await _auth.signInWithEmailAndPassword(
+                                  email: loginEmail, password: loginPassword))
+                              .user;
                       if (user.email != null) {
                         Navigator.pushNamed(context, '/dashboard');
                       }
@@ -335,21 +340,6 @@ class _LoginPageState extends State<LoginPage>
                         isLoading = false;
                       });
                     }
-//                    setState(() {
-//                      isLoading = true;
-//                    });
-//                    myFirebaseAuth.signInWithCredentials(
-//                        loginEmail, loginPassword);
-//                    setState(() {
-//                      isLoading = false;
-//                    });
-//                    print(await myFirebaseAuth.getUser());
-//                    if (myFirebaseAuth.getUser() != null) {
-//                      showInSnackBar("Login successful!");
-//                      Navigator.pushNamed(context, '/dashboard');
-//                    } else {
-//                      showInSnackBar("Email or Password incorrect!");
-//                    }
                   },
                 ),
               ),
@@ -493,6 +483,12 @@ class _LoginPageState extends State<LoginPage>
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/whiteBg.png'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   width: 300.0,
                   height: 360.0,
                   child: Column(
@@ -664,15 +660,20 @@ class _LoginPageState extends State<LoginPage>
                           newPassword != null) {
                         int userImage = Random().nextInt(9);
                         try {
-//                          await myFirebaseAuth.signUp(
-//                              email: newEmail, password: newPassword);
-                          final FirebaseUser newUser = (await _auth.createUserWithEmailAndPassword(email: newEmail, password: newPassword)).user;
+                          final FirebaseUser newUser =
+                              (await _auth.createUserWithEmailAndPassword(
+                                      email: newEmail, password: newPassword))
+                                  .user;
                           if (newUser.email != null) {
                             await fb
                                 .firestore()
                                 .collection('users')
                                 .doc(newEmail)
-                                .set({'name': newName, 'entries': 3, 'dp': userImage});
+                                .set({
+                              'name': newName,
+                              'entries': 3,
+                              'dp': userImage
+                            });
                             Navigator.pushNamed(context, '/dashboard');
                           }
                           setState(() {
@@ -685,25 +686,11 @@ class _LoginPageState extends State<LoginPage>
                             isLoading = false;
                           });
                         }
-                      }
-                      else{
+                      } else {
                         isLoading = false;
                         showInSnackBar('Please enter all details');
                       }
-                    }
-//                    if (newPassword != newConfirmationPassword) {
-//                      showInSnackBar("Password does not match");
-//                    } else {
-//                      fb
-//                          .firestore()
-//                          .collection('users')
-//                          .doc(newEmail)
-//                          .set({'name': newName, 'entries': 3});
-//                      myFirebaseAuth.signUp(
-//                          email: newEmail, password: newPassword);
-//                    }
-//                  },
-                    ),
+                    }),
               ),
             ],
           ),
