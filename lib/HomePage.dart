@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage>
                 fontColor: Colors.white,
                 body: Container(
                   margin: new EdgeInsets.symmetric(horizontal: 20.0),
-                  child: new Text("\n\n1. Click on \"Participate Now\" button on homepage.\n\n2. Register using your email id or you can log in using your Google, Facebook or Twitter account directly which you are most comfortable with.\n\n3. On the dashboard, click on \"Submit a photo\" and upload your entry.\n\n4.Ensure that you are able to see your entry on your dashboard.\n\n5. You can also submit more number of entries, first entry is free of cost and for the following entries, there is nominal entry fee of USD 1 per entry.\n\n\nIF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT help@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.",
+                  child: new Text("\n1. Click on \"Participate Now\" button on homepage.\n\n2. Register using your email id or you can log in using your Google, Facebook or Twitter account directly which you are most comfortable with.\n\n3. On the dashboard, click on \"Submit a photo\" and upload your entry.\n\n4.Ensure that you are able to see your entry on your dashboard.\n\n5. You can also submit more number of entries, first entry is free of cost and you can earn more entries by sharing to the world.\n\nIF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT help@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.",
                     style: TextStyle(
                       fontSize: 20.0,
                       fontFamily: 'George',
