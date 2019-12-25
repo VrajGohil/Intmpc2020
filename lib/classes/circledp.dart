@@ -1,11 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CircleDp extends StatelessWidget {
-  CircleDp({this.address, this.name});
+  CircleDp({this.address, this.name, this.network, this.color =Colors.black});
   final String address;
   final String name;
+  final String network;
+  final Color color;
+  ImageProvider getImage(){
+    if(address != null){
+      return AssetImage(address);
+    }
+    else{
+      return NetworkImage(network);
+    }
+  }
   @override
-//  radius: MediaQuery.of(context).size.height * 0.07,
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -56,7 +66,7 @@ class CircleDp extends StatelessWidget {
                                                   .size
                                                   .height *
                                               0.15,
-                                          backgroundImage: AssetImage(address),
+                                          backgroundImage: getImage(),
                                         ),
                                       ),
                                     ],
@@ -66,37 +76,11 @@ class CircleDp extends StatelessWidget {
                         ),
                       );
                     }));
-
-//                showDialog(
-//                    context: context,
-//                    builder: (BuildContext context) {
-//                      return Hero(
-//                        tag: name,
-//                        child: AlertDialog(
-//                          title: Text(
-//                            name,
-//                            style: TextStyle(
-//                                color: Colors.black, fontFamily: 'George'),
-//                          ),
-//                          backgroundColor: Colors.white,
-//                          shape: RoundedRectangleBorder(
-//                            borderRadius: BorderRadius.circular(16.0),
-//                          ),
-//                          content: Center(
-//                            child: CircleAvatar(
-//                              maxRadius:
-//                                  MediaQuery.of(context).size.height * 0.15,
-//                              backgroundImage: AssetImage(address),
-//                            ),
-//                          ),
-//                        ),
-//                      );
-//                    });
               },
               child: Hero(
                 tag: name,
                 child: CircleAvatar(
-                  backgroundImage: AssetImage(address),
+                  backgroundImage: getImage(),
 //              radius: 38.0,
                   radius: MediaQuery.of(context).size.height <= 600.0
                       ? MediaQuery.of(context).size.height * 0.07
@@ -111,7 +95,7 @@ class CircleDp extends StatelessWidget {
           child: Text(
             name,
             style: TextStyle(
-              color: Colors.black,
+              color: color,
               fontFamily: 'George',
             ),
           ),

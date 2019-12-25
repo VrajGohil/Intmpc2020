@@ -5,6 +5,8 @@ import 'package:intmpc/classes/custom_button.dart';
 import 'classes/circledp.dart';
 import 'classes/custom_page.dart';
 import 'classes/custom_text_card.dart';
+import 'classes/statcard.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends KFDrawerContent {
   HomePage({
@@ -23,7 +25,15 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _controller = PageController();
   }
-
+  _launchURL() async {
+    const url = 'http://intmpc2018.gq';
+    if ( await canLaunch(url)){
+      await launch(url);
+    }
+    else {
+      throw 'Could not launch $url';
+    }
+  }
   @override
   void dispose() {
     super.dispose();
@@ -198,6 +208,61 @@ class _HomePageState extends State<HomePage>
                 title: 'INTMPC\n  2018',
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
+                body: Column(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        StatCard(
+                          numdata: '12k+',
+                          type: 'Entries',
+                        ),
+                        Container( color: Colors.white30, height: 38, width: 2,),
+                        StatCard(
+                          numdata: '10',
+                          type: 'Judges',
+                        ),
+                        Container( color: Colors.white30, height: 38, width: 2,),
+                        StatCard(
+                          numdata: '156',
+                          type: 'Countries',
+                        )
+                      ],
+                    ),
+                    Container(
+                      child: InkWell(child: Image.network('http://intmpc2018.gq/assets/images/logo-310x240.png'),
+                      onTap: _launchURL,),
+                      width: 200,
+                      height: 200,
+                    ),
+                    Title(color: Colors.white, child: Text('Winners', style: TextStyle(
+                      fontFamily: 'George',
+                      fontSize: 28.0,
+                    ),
+                    ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        CircleDp(
+                          network: 'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/A3D0346C-D521-41C3-AD5A-34DD18694ACD-nn2ugouunwbd90i4iindyfdkv83cznt8x6ee33xtg8.jpeg',
+                          name: 'Angela Manalili',
+                          color: Colors.white,
+                        ),
+                        CircleDp(
+                          network: 'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/IMG_2536f%D1%87-nn6lln591q2hczvzlx4zl9u8pvd0zic44gg20omj4o.jpg',
+                          name: 'Alina Dotsenko',
+                          color: Colors.white,
+                        ),
+                        CircleDp(
+                          network: 'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/Horsefly-Portrait-nmol96d1t0qah17ujdirfnpng7jrdzaxfvi3xxrn14.jpg',
+                          name: 'Priyank Dhami',
+                          color: Colors.white,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
               CustomPage(
                 title: 'Contact',
