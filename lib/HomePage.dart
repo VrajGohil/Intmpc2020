@@ -136,6 +136,7 @@ class _HomePageState extends State<HomePage>
                 title: 'Awards',
                 imagePath: 'assets/whiteBg.png',
                 fontColor: Colors.black,
+                body: Container(),
               ),
               CustomPage(
                 title: 'Host',

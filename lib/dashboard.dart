@@ -5,6 +5,7 @@ import 'package:intmpc/circular_indicator.dart';
 import 'classes/custom_button.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:flutter_web_image_picker/flutter_web_image_picker.dart';
+import 'package:http/http.dart' as http;
 
 //TODO: Make List to add widgets to column.
 class Dashboard extends StatefulWidget {
@@ -19,6 +20,7 @@ class _DashboardState extends State<Dashboard> {
   var data;
   String userName;
   Image image;
+
   @override
   void initState() {
     getUserName();
