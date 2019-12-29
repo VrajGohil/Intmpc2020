@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/circular_indicator.dart';
@@ -20,6 +21,9 @@ class _DashboardState extends State<Dashboard> {
   var data;
   String userName;
   Image image;
+  String url = 'https://i.ibb.co/0sd5hdb/b457fb8d2496.png';
+  String base64Image;
+  List<Widget> submission = [SizedBox()];
 
   @override
   void initState() {
@@ -37,7 +41,8 @@ class _DashboardState extends State<Dashboard> {
   Future<void> getImage() async {
     var tempImage = await FlutterWebImagePicker.getImage;
     setState(() {
-      image = tempImage;
+      image = tempImage[0];
+      base64Image = tempImage[1];
     });
   }
 
@@ -65,14 +70,39 @@ class _DashboardState extends State<Dashboard> {
           actions: <Widget>[
             CustomButton(
               text: 'Cancel',
-              method: (){
+              method: () {
                 Navigator.of(context).pop();
               },
             ),
             CustomButton(
               text: 'Upload',
               method: () async {
-                await fb.storage().ref().child('images/$userEmail+$entries').put(image);
+                print(base64Image);
+                http.post(
+                    'https://api.imgbb.com/1/upload?key=6b908e80517e7a275075491546164b43',
+                    body: {
+                      "image": base64Image,
+                    }).then((res) {
+                  print(res.statusCode);
+                  print(res.body);
+                  Map body = jsonDecode(res.body);
+                  setState(() {
+                    url = body['data']['display_url'];
+                  });
+                  print(url);
+                }).catchError((err) {
+                  print(err);
+                });
+                await fb
+                    .firestore()
+                    .collection('images')
+                    .add({'url': url, 'user': userEmail});
+                setState(() {
+                  entries--;
+                });
+                await fb.firestore().collection('users').doc(userEmail).set({
+                  'entries': entries,
+                });
                 Navigator.of(context).pop();
               },
             ),
@@ -80,6 +110,33 @@ class _DashboardState extends State<Dashboard> {
         );
       },
     );
+  }
+
+  Future<void> getEntries() async {
+    await fb
+        .firestore()
+        .collection('images')
+        .where('user', '==', userEmail)
+        .get()
+        .then((onValue) {
+          onValue.forEach((entry){
+            print(entry.data()['url']);
+            setState(() {
+              submission.add(Container(
+                margin: EdgeInsets.all(20.0),
+                width: 450,
+                height: 200,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Image.network(
+                    entry.data()['url'],
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),);
+            });
+          });
+    });
   }
 
   Future<void> getUserName() async {
@@ -103,6 +160,7 @@ class _DashboardState extends State<Dashboard> {
         entries = data['entries'];
         userImage = data['dp'];
         print("Username is $userName");
+        getEntries();
       });
     }
   }
@@ -113,7 +171,7 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 1000, //this is temporary
+          height: 1400, //this is temporary
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/whiteBg.png'),
@@ -207,10 +265,10 @@ class _DashboardState extends State<Dashboard> {
                             radius: 90.0,
                             lineWidth: 7.0,
                             animation: true,
-                            percent: entries / 10,
+                            percent: entries / 3,
                             circularStrokeCap: CircularStrokeCap.round,
                             footer: Text(
-                              'Entries Submitted',
+                              'Entries Remaning',
                               style: TextStyle(
                                   color: Colors.grey, fontFamily: 'George'),
                             ),
@@ -278,30 +336,21 @@ class _DashboardState extends State<Dashboard> {
                     ),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.all(20.0),
-                  width: 450,
-                  height: 200,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.0),
-                    child: Image.asset(
-                      'assets/blackBg.png',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
+                Column(
+                  children: submission,
                 ),
-                Container(
-                  margin: EdgeInsets.all(20.0),
-                  width: 450,
-                  height: 200,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16.0),
-                    child: Image.asset(
-                      'assets/blackBg.png',
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
+//                Container(
+//                  margin: EdgeInsets.all(20.0),
+//                  width: 450,
+//                  height: 200,
+//                  child: ClipRRect(
+//                    borderRadius: BorderRadius.circular(16.0),
+//                    child: Image.asset(
+//                      'assets/blackBg.png',
+//                      fit: BoxFit.fill,
+//                    ),
+//                  ),
+//                ),
               ],
             ),
           ),
