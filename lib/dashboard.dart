@@ -6,6 +6,7 @@ import 'package:intmpc/circular_indicator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'classes/custom_button.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'package:firebase/firestore.dart' as fs;
 import 'package:flutter_web_image_picker/flutter_web_image_picker.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,15 +25,21 @@ class _DashboardState extends State<Dashboard> {
   Image image;
   String url = 'https://i.ibb.co/0sd5hdb/b457fb8d2496.png';
   String base64Image;
-  List<Widget> submission = [SizedBox()];
 
   @override
   void initState() {
     getUserName();
     print(userName);
+    streamTest();
     super.initState();
   }
-
+  void streamTest() async{
+    await fb.firestore().collection('images').where('user', '==', 'google.com').onSnapshot.forEach((snapshot){
+      snapshot.docs.forEach((data){
+        print(data.data());
+      });
+    });
+  }
   Future<void> getImage() async {
     var tempImage = await FlutterWebImagePicker.getImage;
     setState(() {
@@ -124,35 +131,6 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  Future<void> getEntries() async {
-    await fb
-        .firestore()
-        .collection('images')
-        .where('user', '==', userEmail)
-        .get()
-        .then((onValue) {
-      onValue.forEach((entry) {
-        print(entry.data()['url']);
-        setState(() {
-          submission.add(
-            Container(
-              margin: EdgeInsets.all(12.0),
-              width: 110,
-              height: 110,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Image.network(
-                  entry.data()['url'],
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          );
-        });
-      });
-    });
-  }
-
   Future<void> getUserName() async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     userEmail = (await _auth.currentUser()).email;
@@ -174,7 +152,6 @@ class _DashboardState extends State<Dashboard> {
         entries = data['entries'];
         userImage = data['dp'];
         print("Username is $userName");
-        getEntries();
       });
     }
   }
@@ -352,20 +329,38 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: submission,
+                  children: <Widget>[
+                    StreamBuilder<fs.QuerySnapshot>(
+                      stream: fb.firestore().collection('images').where('user', '==', userEmail).onSnapshot,
+                      builder: (context, snapshot){
+                        List<Container> urlWidgets = [];
+                        if(snapshot.hasData){
+                          final url = snapshot.data.docs;
+                          url.forEach((data){
+                            final urlText = data.data()['url'];
+                            final urlWidget = Container(
+                              margin: EdgeInsets.all(12.0),
+                              width: 110,
+                              height: 110,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(16.0),
+                                child: Image.network(
+                                  urlText,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            );
+                            urlWidgets.add(urlWidget);
+                          });
+                        }
+                        return Row(
+                          children: urlWidgets,
+                        );
+                      },
+                    ),
+                    Container(),
+                  ],
                 ),
-//                Container(
-//                  margin: EdgeInsets.all(20.0),
-//                  width: 450,
-//                  height: 200,
-//                  child: ClipRRect(
-//                    borderRadius: BorderRadius.circular(16.0),
-//                    child: Image.asset(
-//                      'assets/blackBg.png',
-//                      fit: BoxFit.fill,
-//                    ),
-//                  ),
-//                ),
               ],
             ),
           ),
