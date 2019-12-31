@@ -334,7 +334,13 @@ class _DashboardState extends State<Dashboard> {
                       stream: fb.firestore().collection('images').where('user', '==', userEmail).onSnapshot,
                       builder: (context, snapshot){
                         List<Container> urlWidgets = [];
-                        if(snapshot.hasData){
+                        if(!snapshot.hasData){
+                          return Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.grey,
+                            ),
+                          );
+                        }
                           final url = snapshot.data.docs;
                           url.forEach((data){
                             final urlText = data.data()['url'];
@@ -352,7 +358,6 @@ class _DashboardState extends State<Dashboard> {
                             );
                             urlWidgets.add(urlWidget);
                           });
-                        }
                         return Row(
                           children: urlWidgets,
                         );
