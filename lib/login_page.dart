@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'bubble_indication_painter.dart';
 import 'classes/custom_button.dart';
 import 'package:firebase/firebase.dart' as fb;
@@ -53,6 +54,7 @@ class _LoginPageState extends State<LoginPage>
   String newConfirmationPassword;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +85,17 @@ class _LoginPageState extends State<LoginPage>
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
-                      child: new Image(
-                          width: 230.0,
-                          height: 171.0,
-                          fit: BoxFit.fill,
-                          image: new AssetImage('assets/logo.png')),
+                      child: InkWell(
+                        onTap: () => Navigator.pushNamed(context, '/'),
+                        child: Hero(
+                          tag: 'logo',
+                          child: new Image(
+                              width: 230.0,
+                              height: 171.0,
+                              fit: BoxFit.fill,
+                              image: new AssetImage('assets/logo.png')),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
@@ -446,7 +454,38 @@ class _LoginPageState extends State<LoginPage>
               Padding(
                 padding: EdgeInsets.only(top: 10.0),
                 child: GestureDetector(
-//                  onTap: () => myFirebaseAuth.signInWithGoogle(),
+                  onTap: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    final GoogleSignInAccount googleUser =
+                        await _googleSignIn.signIn();
+                    final GoogleSignInAuthentication googleAuth =
+                        await googleUser.authentication;
+                    final AuthCredential credential =
+                        GoogleAuthProvider.getCredential(
+                      accessToken: googleAuth.accessToken,
+                      idToken: googleAuth.idToken,
+                    );
+                    int userImage = Random().nextInt(9);
+                      final FirebaseUser user =
+                          (await _auth.signInWithCredential(credential)).user;
+                      if (user.email != null) {
+                        await fb
+                            .firestore()
+                            .collection('users')
+                            .doc(user.email)
+                            .set({
+                          'name': user.displayName,
+                          'entries': 3,
+                          'dp': userImage
+                        });
+                        Navigator.pushNamed(context, '/dashboard');
+                      }
+                      setState(() {
+                        isLoading = false;
+                      });
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(15.0),
                     decoration: new BoxDecoration(

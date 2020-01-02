@@ -27,12 +27,19 @@ class CustomPage extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontFamily: 'Brush',
-                    color: fontColor,
-                    fontSize: 42.0,
+                child: Card(
+                  shape: BeveledRectangleBorder(side: BorderSide(color: fontColor, width: 3.0),),
+                  color: Colors.transparent,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontFamily: 'George',
+                        color: fontColor,
+                        fontSize: 42.0,
+                      ),
+                    ),
                   ),
                 ),
               ),

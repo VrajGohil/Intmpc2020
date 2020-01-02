@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CircleDp extends StatelessWidget {
-  CircleDp({this.address, this.name, this.network, this.color =Colors.black});
+  CircleDp({this.address, this.name, this.network, this.color = Colors.black});
   final String address;
   final String name;
   final String network;
