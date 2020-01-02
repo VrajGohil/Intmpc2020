@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
@@ -25,15 +26,16 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _controller = PageController();
   }
+
   _launchURL() async {
     const url = 'http://intmpc2018.gq';
-    if ( await canLaunch(url)){
+    if (await canLaunch(url)) {
       await launch(url);
-    }
-    else {
+    } else {
       throw 'Could not launch $url';
     }
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -77,7 +79,10 @@ class _HomePageState extends State<HomePage>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Container(
-                            child: Image.asset('assets/logo.png'),
+                            child: Hero(
+                              child: Image.asset('assets/logo.png'),
+                              tag: 'logo',
+                            ),
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: MediaQuery.of(context).size.height * 0.45,
                           ),
@@ -86,8 +91,11 @@ class _HomePageState extends State<HomePage>
                           ),
                           CustomButton(
                             text: 'Participate Now',
-                            method: () {
-                              Navigator.pushNamed(context, '/dashboard');
+                            method: () async {
+                              FirebaseAuth _auth = FirebaseAuth.instance;
+                              await _auth.currentUser() != null
+                                  ? Navigator.pushNamed(context, '/dashboard')
+                                  : Navigator.pushNamed(context, '/login');
                             },
                           ),
                         ],
@@ -118,15 +126,41 @@ class _HomePageState extends State<HomePage>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      CustomTextCard(text: 'Click on \"Participate Now\" button on homepage.',number: '1.',),
-                      CustomTextCard(text: 'Sign-up which you are most comfortable with.',number: '2.',),
-                      CustomTextCard(text: 'On the dashboard, click on \"Submit a photo\"\n and upload your entry.',number: '3.',),
-                      CustomTextCard(text: 'Ensure that you are able to see \nyour entry on your dashboard.',number: '4.',),
-                      CustomTextCard(text: 'First entry is free for all.', number: '5.',),
-                      CustomTextCard(text: 'Earn more entries by sharing this with friend', number: '6.',),
+                      CustomTextCard(
+                        text:
+                            'Click on \"Participate Now\" button on homepage.',
+                        number: '1.',
+                      ),
+                      CustomTextCard(
+                        text: 'Sign-up which you are most comfortable with.',
+                        number: '2.',
+                      ),
+                      CustomTextCard(
+                        text:
+                            'On the dashboard, click on \"Submit a photo\"\n and upload your entry.',
+                        number: '3.',
+                      ),
+                      CustomTextCard(
+                        text:
+                            'Ensure that you are able to see \nyour entry on your dashboard.',
+                        number: '4.',
+                      ),
+                      CustomTextCard(
+                        text: 'First entry is free for all.',
+                        number: '5.',
+                      ),
+                      CustomTextCard(
+                        text: 'Earn more entries by sharing this with friend',
+                        number: '6.',
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: Text('IF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT help@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.',style: TextStyle(fontFamily: 'George',fontSize: 14.0),textAlign: TextAlign.center,),
+                        child: Text(
+                          'IF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT help@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.',
+                          style:
+                              TextStyle(fontFamily: 'George', fontSize: 14.0),
+                          textAlign: TextAlign.center,
+                        ),
                       )
                     ],
                   ),
@@ -218,12 +252,20 @@ class _HomePageState extends State<HomePage>
                           numdata: '12k+',
                           type: 'Entries',
                         ),
-                        Container( color: Colors.white30, height: 38, width: 2,),
+                        Container(
+                          color: Colors.white30,
+                          height: 38,
+                          width: 2,
+                        ),
                         StatCard(
                           numdata: '10',
                           type: 'Judges',
                         ),
-                        Container( color: Colors.white30, height: 38, width: 2,),
+                        Container(
+                          color: Colors.white30,
+                          height: 38,
+                          width: 2,
+                        ),
                         StatCard(
                           numdata: '156',
                           type: 'Countries',
@@ -231,32 +273,42 @@ class _HomePageState extends State<HomePage>
                       ],
                     ),
                     Container(
-                      child: InkWell(child: Image.network('http://intmpc2018.gq/assets/images/logo-310x240.png'),
-                      onTap: _launchURL,),
+                      child: InkWell(
+                        child: Image.network(
+                            'http://intmpc2018.gq/assets/images/logo-310x240.png'),
+                        onTap: _launchURL,
+                      ),
                       width: 200,
                       height: 200,
                     ),
-                    Title(color: Colors.white, child: Text('Winners', style: TextStyle(
-                      fontFamily: 'George',
-                      fontSize: 28.0,
-                    ),
-                    ),
+                    Title(
+                      color: Colors.white,
+                      child: Text(
+                        'Winners',
+                        style: TextStyle(
+                          fontFamily: 'George',
+                          fontSize: 28.0,
+                        ),
+                      ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         CircleDp(
-                          network: 'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/A3D0346C-D521-41C3-AD5A-34DD18694ACD-nn2ugouunwbd90i4iindyfdkv83cznt8x6ee33xtg8.jpeg',
+                          network:
+                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/A3D0346C-D521-41C3-AD5A-34DD18694ACD-nn2ugouunwbd90i4iindyfdkv83cznt8x6ee33xtg8.jpeg',
                           name: 'Angela Manalili',
                           color: Colors.white,
                         ),
                         CircleDp(
-                          network: 'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/IMG_2536f%D1%87-nn6lln591q2hczvzlx4zl9u8pvd0zic44gg20omj4o.jpg',
+                          network:
+                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/IMG_2536f%D1%87-nn6lln591q2hczvzlx4zl9u8pvd0zic44gg20omj4o.jpg',
                           name: 'Alina Dotsenko',
                           color: Colors.white,
                         ),
                         CircleDp(
-                          network: 'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/Horsefly-Portrait-nmol96d1t0qah17ujdirfnpng7jrdzaxfvi3xxrn14.jpg',
+                          network:
+                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/Horsefly-Portrait-nmol96d1t0qah17ujdirfnpng7jrdzaxfvi3xxrn14.jpg',
                           name: 'Priyank Dhami',
                           color: Colors.white,
                         ),
@@ -294,4 +346,3 @@ class _HomePageState extends State<HomePage>
     );
   }
 }
-

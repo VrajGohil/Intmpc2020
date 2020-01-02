@@ -134,9 +134,6 @@ class _DashboardState extends State<Dashboard> {
   Future<void> getUserName() async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     userEmail = (await _auth.currentUser()).email;
-    if (userEmail == null) {
-      Navigator.pushNamed(context, '/login');
-    } else {
       data = await fb
           .firestore()
           .collection('users')
@@ -153,7 +150,6 @@ class _DashboardState extends State<Dashboard> {
         userImage = data['dp'];
         print("Username is $userName");
       });
-    }
   }
 
   @override
@@ -172,7 +168,6 @@ class _DashboardState extends State<Dashboard> {
           child: SafeArea(
             child: Column(
               mainAxisSize: MainAxisSize.max,
-//              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Container(
                   width: MediaQuery.of(context).size.width >= 700.0

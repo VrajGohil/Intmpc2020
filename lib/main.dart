@@ -16,9 +16,9 @@ void main() {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        '/' : (context) => MainWidget(),
-        '/login' : (context) => LoginPage(),
-        '/dashboard' : (context) => Dashboard(),
+        '/': (context) => MainWidget(),
+        '/login': (context) => LoginPage(),
+        '/dashboard': (context) => Dashboard(),
       },
       initialRoute: '/',
 //      home: MainWidget(),
@@ -38,12 +38,29 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   KFDrawerController _drawerController;
   String signIn = 'SIGN IN';
   FirebaseAuth _auth = FirebaseAuth.instance;
+  List<KFDrawerItem> items = [
+    KFDrawerItem.initWithPage(
+      text: Text('HOME', style: TextStyle(color: Colors.white,fontFamily: 'George'),),
+      icon: Icon(Icons.home, color: Colors.white),
+      page: HomePage(),
+    ),
+  ];
 
   Future<void> getSignIn() async {
     String userEmail = (await _auth.currentUser()).email;
-    if (userEmail != null){
+    if (userEmail != null) {
       setState(() {
         signIn = 'SIGN OUT';
+        items.add(
+          KFDrawerItem.initWithPage(
+            text: Text(
+              'DASHBOARD',
+              style: TextStyle(color: Colors.white,fontFamily: 'George'),
+            ),
+            icon: Icon(Icons.dashboard, color: Colors.white),
+            onPressed: () => Navigator.pushNamed(context, '/dashboard'),
+          ),
+        );
       });
     }
   }
@@ -52,33 +69,10 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   void initState() {
     getSignIn();
     super.initState();
-    _drawerController = KFDrawerController(
-      initialPage: HomePage(),
-      items: [
-        KFDrawerItem.initWithPage(
-          text: Text('HOME', style: TextStyle(color: Colors.white)),
-          icon: Icon(Icons.home, color: Colors.white),
-          page: HomePage(),
-        ),
-        KFDrawerItem.initWithPage(
-          text: Text(
-            'CALENDAR',
-            style: TextStyle(color: Colors.white),
-          ),
-          icon: Icon(Icons.calendar_today, color: Colors.white),
-//          page: CalendarPage(),
-        ),
-        KFDrawerItem.initWithPage(
-          text: Text(
-            'SETTINGS',
-            style: TextStyle(color: Colors.white),
-          ),
-          icon: Icon(Icons.settings, color: Colors.white),
-//          page: ClassBuilder.fromString('SettingsPage'),
-        ),
-      ],
-    );
+    _drawerController =
+        KFDrawerController(initialPage: HomePage(), items: items);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,20 +93,20 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         footer: KFDrawerItem(
           text: Text(
             signIn,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Colors.white,fontFamily: 'George'),
           ),
           icon: Icon(
             Icons.input,
             color: Colors.white,
           ),
           onPressed: () {
-            if(signIn == 'SIGN OUT'){
+            if (signIn == 'SIGN OUT') {
               _auth.signOut();
               setState(() {
                 signIn = 'SIGN IN';
+                items.removeLast();
               });
-            }
-            else{
+            } else {
               Navigator.pushNamed(context, '/login');
             }
           },
