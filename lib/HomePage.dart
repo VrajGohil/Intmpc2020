@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               CustomPage(
-                title: 'INTMPC\n  2018',
+                title: 'INTMPC\n2018',
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
                 body: Column(
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage>
                     Container(
                       child: InkWell(
                         child: Image.network(
-                            'http://intmpc2018.gq/assets/images/logo-310x240.png'),
+                            'https://i.ibb.co/1RnsL0j/intmpc2018.png'),
                         onTap: _launchURL,
                       ),
                       width: 200,
@@ -296,19 +296,19 @@ class _HomePageState extends State<HomePage>
                       children: <Widget>[
                         CircleDp(
                           network:
-                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/A3D0346C-D521-41C3-AD5A-34DD18694ACD-nn2ugouunwbd90i4iindyfdkv83cznt8x6ee33xtg8.jpeg',
+                              'https://i.ibb.co/86NDp3D/entry1.jpg',
                           name: 'Angela Manalili',
                           color: Colors.white,
                         ),
                         CircleDp(
                           network:
-                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/IMG_2536f%D1%87-nn6lln591q2hczvzlx4zl9u8pvd0zic44gg20omj4o.jpg',
+                              'https://i.ibb.co/cLQ01Kv/entry2.jpg',
                           name: 'Alina Dotsenko',
                           color: Colors.white,
                         ),
                         CircleDp(
                           network:
-                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/Horsefly-Portrait-nmol96d1t0qah17ujdirfnpng7jrdzaxfvi3xxrn14.jpg',
+                              'https://i.ibb.co/sKpmdry/entry3.jpg',
                           name: 'Priyank Dhami',
                           color: Colors.white,
                         ),

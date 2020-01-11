@@ -34,6 +34,7 @@ class CustomPage extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Text(
                       title,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'George',
                         color: fontColor,
