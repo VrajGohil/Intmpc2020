@@ -26,6 +26,7 @@ class _DashboardState extends State<Dashboard> {
   Image image;
   String url = 'https://i.ibb.co/0sd5hdb/b457fb8d2496.png';
   String base64Image;
+  DateTime _currentTime = DateTime.now();
 
   @override
   void initState() {
@@ -36,6 +37,12 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void streamTest() async {
+    final response = await http.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
+    print(jsonDecode(response.body));
+    setState(() {
+      _currentTime = DateTime.parse(jsonDecode(response.body)['utc_datetime']);
+    });
+    print(_currentTime);
     await fb
         .firestore()
         .collection('images')
@@ -158,7 +165,6 @@ class _DashboardState extends State<Dashboard> {
       print("Username is $userName");
     });
   }
-
   _countdownTimer(Duration duration) {
     return Scaffold(
       body: Container(
@@ -175,7 +181,7 @@ class _DashboardState extends State<Dashboard> {
             builder: (BuildContext ctx, String remaining) {
               return Card(
                 elevation: 20.0,
-                color: Colors.white70,
+                color: Colors.grey.withOpacity(0.1),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
                 child: Container(
                   width: 370.0,
@@ -198,9 +204,7 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    print(now);
-    var difference = now.difference(
+    var difference = _currentTime.difference(
       DateTime.parse('2020-02-25 00:00:00.00'),
     );
 //  Use while testing dashboard
