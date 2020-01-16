@@ -157,17 +157,17 @@ class _HomePageState extends State<HomePage>
                         number: '4.',
                       ),
                       CustomTextCard(
-                        text: 'First entry is free for all.',
+                        text: 'You can submit total 3 entries so don\'t\nforget to utilise all three entries.',
                         number: '5.',
                       ),
                       CustomTextCard(
-                        text: 'Earn more entries by sharing this with friend',
+                        text: 'Sit back and chill while we evaluate your entries.',
                         number: '6.',
                       ),
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Text(
-                          'IF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT help@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.',
+                          'IF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT contact@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.',
                           style:
                               TextStyle(fontFamily: 'George', fontSize: 14.0),
                           textAlign: TextAlign.center,
@@ -251,8 +251,8 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-                          address: 'assets/logo.png',
-                          name: 'Karen Webster',
+                          address: 'assets/karen.jpg',
+                          name: 'Karen Brewer',
                         ),
                         CircleDp(
                           address: 'assets/raj.jpg',
