@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 import 'package:intmpc/classes/custom_button.dart';
@@ -8,6 +9,15 @@ import 'classes/custom_page.dart';
 import 'classes/custom_text_card.dart';
 import 'classes/statcard.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+var blackLine = Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: Container(
+    color: Colors.black.withOpacity(0.3),
+    height: 1.0,
+    width: 32.0,
+  ),
+);
 
 class HomePage extends KFDrawerContent {
   HomePage({
@@ -27,8 +37,7 @@ class _HomePageState extends State<HomePage>
     _controller = PageController();
   }
 
-  _launchURL() async {
-    const url = 'http://intmpc2018.gq';
+  _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -43,6 +52,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    var _greyText = TextStyle(
+        fontSize: 16.0, fontFamily: 'George', color: Colors.grey.shade700);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -146,7 +157,7 @@ class _HomePageState extends State<HomePage>
                         number: '4.',
                       ),
                       CustomTextCard(
-                        text: 'You can submit total 3 entries so don't forget to utilise all three entries.',
+                        text: 'You can submit total 3 entries so don\'t\nforget to utilise all three entries.',
                         number: '5.',
                       ),
                       CustomTextCard(
@@ -170,12 +181,29 @@ class _HomePageState extends State<HomePage>
                 title: 'Awards',
                 imagePath: 'assets/whiteBg.png',
                 fontColor: Colors.black,
-                body: Container(),
+                body: Center(
+                  child: Container(
+                    child: Image.network(
+                      'https://i.ibb.co/Mc7PGXM/d6627a6e27.gif',
+                      width: 300,
+                      height: 300,
+                    ),
+                  ),
+                ),
               ),
               CustomPage(
-                title: 'Host',
+                title: 'Sponsors',
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
+                body: Center(
+                  child: Container(
+                    child: Image.network(
+                      'https://i.ibb.co/NpZ413K/883ab47915.gif',
+                      width: 300,
+                      height: 300,
+                    ),
+                  ),
+                ),
               ),
               CustomPage(
                 title: 'Jury',
@@ -240,7 +268,7 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               CustomPage(
-                title: 'INTMPC\n  2018',
+                title: 'INTMPC\n2018',
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
                 body: Column(
@@ -275,8 +303,8 @@ class _HomePageState extends State<HomePage>
                     Container(
                       child: InkWell(
                         child: Image.network(
-                            'http://intmpc2018.gq/assets/images/logo-310x240.png'),
-                        onTap: _launchURL,
+                            'https://i.ibb.co/1RnsL0j/intmpc2018.png'),
+                        onTap: () => _launchURL('http://intmpc2018.gq'),
                       ),
                       width: 200,
                       height: 200,
@@ -295,20 +323,17 @@ class _HomePageState extends State<HomePage>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         CircleDp(
-                          network:
-                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/A3D0346C-D521-41C3-AD5A-34DD18694ACD-nn2ugouunwbd90i4iindyfdkv83cznt8x6ee33xtg8.jpeg',
+                          network: 'https://i.ibb.co/86NDp3D/entry1.jpg',
                           name: 'Angela Manalili',
                           color: Colors.white,
                         ),
                         CircleDp(
-                          network:
-                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/IMG_2536f%D1%87-nn6lln591q2hczvzlx4zl9u8pvd0zic44gg20omj4o.jpg',
+                          network: 'https://i.ibb.co/cLQ01Kv/entry2.jpg',
                           name: 'Alina Dotsenko',
                           color: Colors.white,
                         ),
                         CircleDp(
-                          network:
-                              'http://intmpc2018.gq/a/wp-content/uploads/elementor/thumbs/Horsefly-Portrait-nmol96d1t0qah17ujdirfnpng7jrdzaxfvi3xxrn14.jpg',
+                          network: 'https://i.ibb.co/sKpmdry/entry3.jpg',
                           name: 'Priyank Dhami',
                           color: Colors.white,
                         ),
@@ -317,10 +342,163 @@ class _HomePageState extends State<HomePage>
                   ],
                 ),
               ),
-              CustomPage(
-                title: 'Contact',
-                imagePath: 'assets/whiteBg.png',
-                fontColor: Colors.black,
+              Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/whiteBg.png'),
+                      fit: BoxFit.fill),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () => _controller.animateToPage(0,
+                          duration: Duration(seconds: 2), curve: Curves.linear),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Icon(
+                          Icons.keyboard_arrow_up,
+                          color: Colors.black.withOpacity(0.6),
+                          size: 46.0,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 16.0,
+                    ),
+                    InkWell(
+                      onTap: () => _controller.animateToPage(0,
+                          duration: Duration(seconds: 2), curve: Curves.linear),
+                      child: Text(
+                        '  Homepage  ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32.0,
+                            fontFamily: 'George'),
+                      ),
+                    ),
+                    blackLine,
+                    InkWell(
+                      onTap: () => _controller.animateToPage(1,
+                          duration: Duration(seconds: 2), curve: Curves.linear),
+                      child: Text(
+                        'How to enter',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32.0,
+                            fontFamily: 'George'),
+                      ),
+                    ),
+                    blackLine,
+                    InkWell(
+                      onTap: () => _controller.animateToPage(2,
+                          duration: Duration(seconds: 2), curve: Curves.linear),
+                      child: Text(
+                        '    Awards    ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32.0,
+                            fontFamily: 'George'),
+                      ),
+                    ),
+                    blackLine,
+                    InkWell(
+                      onTap: () => _controller.animateToPage(3,
+                          duration: Duration(seconds: 2), curve: Curves.linear),
+                      child: Text(
+                        'Sponsor spot',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32.0,
+                            fontFamily: 'George'),
+                      ),
+                    ),
+                    blackLine,
+                    InkWell(
+                      onTap: () => _controller.animateToPage(4,
+                          duration: Duration(seconds: 2), curve: Curves.linear),
+                      child: Text(
+                        '     Jury     ',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32.0,
+                            fontFamily: 'George'),
+                      ),
+                    ),
+                    blackLine,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          height: 150.0,
+                          width: 90.0,
+                          child: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.instagram,
+                              size: 50.0,
+                              color: Colors.black,
+                            ),
+                            onPressed: () => _launchURL(
+                                'https://instagram.com/macroandflora'),
+                          ),
+                        ),
+                        Container(
+                          height: 150.0,
+                          width: 90.0,
+                          child: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.patreon,
+                              size: 50.0,
+                              color: Colors.black,
+                            ),
+                            onPressed: () => _launchURL(
+                                'https://www.patreon.com/intmpc2020'),
+                          ),
+                        ),
+                        Container(
+                          height: 150.0,
+                          width: 90.0,
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.email,
+                              size: 50.0,
+                              color: Colors.black,
+                            ),
+                            onPressed: () =>
+                                launch('mailto:contact@intmpc2020.co'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    SelectableText(
+                      'Privacy Policy',
+                      style: _greyText,
+                      onTap: () => _launchURL('https://intmpc2020.co/privacy_policy'),
+                    ),
+                    SizedBox(height: 2.0,),
+                    SelectableText(
+                      'Email: contact@intmpc2020.co',
+                      style: _greyText,
+                      onTap: () => launch('mailto:contact@intmpc2020.co'),
+                    ),
+                    Expanded(child: Container()),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Text(
+                          'Made with ❤️ by Vraj Gohil & Raj Bheda',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'George',
+                              fontSize: 22.0),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
             scrollDirection: Axis.vertical,
