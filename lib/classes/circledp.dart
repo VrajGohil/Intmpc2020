@@ -7,14 +7,14 @@ class CircleDp extends StatelessWidget {
   final String name;
   final String network;
   final Color color;
-  ImageProvider getImage(){
-    if(address != null){
+  ImageProvider getImage() {
+    if (address != null) {
       return AssetImage(address);
-    }
-    else{
+    } else {
       return NetworkImage(network);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -81,10 +81,8 @@ class CircleDp extends StatelessWidget {
                 tag: name,
                 child: CircleAvatar(
                   backgroundImage: getImage(),
-//              radius: 38.0,
-                  radius: MediaQuery.of(context).size.height <= 600.0
-                      ? MediaQuery.of(context).size.height * 0.07
-                      : 38.0,
+//              radius: MediaQuery.of(context).size.width * 0.1,
+                  radius: MediaQuery.of(context).size.height * 0.043,
                 ),
               ),
             ),
@@ -97,6 +95,9 @@ class CircleDp extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontFamily: 'George',
+              fontSize: MediaQuery.of(context).size.height >= 650.0
+                  ? 15.0
+                  : 10.0,
             ),
           ),
         ),

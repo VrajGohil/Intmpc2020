@@ -37,7 +37,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void streamTest() async {
-    final response = await http.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
+    final response =
+        await http.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
     print(jsonDecode(response.body));
     setState(() {
       _currentTime = DateTime.parse(jsonDecode(response.body)['utc_datetime']);
@@ -165,6 +166,7 @@ class _DashboardState extends State<Dashboard> {
       print("Username is $userName");
     });
   }
+
   _countdownTimer(Duration duration) {
     return Scaffold(
       body: Container(
@@ -174,7 +176,7 @@ class _DashboardState extends State<Dashboard> {
         ),
         child: Center(
           child: CountdownFormatted(
-            onFinish: (){
+            onFinish: () {
               print('finished');
             },
             duration: duration,
@@ -182,7 +184,8 @@ class _DashboardState extends State<Dashboard> {
               return Card(
                 elevation: 20.0,
                 color: Colors.grey.withOpacity(0.1),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)),
                 child: Container(
                   width: 370.0,
                   height: 200.0,
@@ -190,7 +193,10 @@ class _DashboardState extends State<Dashboard> {
                     child: Text(
                       remaining,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontFamily: 'George', fontSize: 60.0,color: Colors.black),
+                      style: TextStyle(
+                          fontFamily: 'George',
+                          fontSize: 60.0,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -212,226 +218,236 @@ class _DashboardState extends State<Dashboard> {
 //      DateTime.parse('2020-01-11 12:13:00.00'),
 //    );
     print(difference);
-    return -difference.inSeconds > 0
+    return /*-difference.inSeconds > 0
         ? _countdownTimer(-difference)
-        : Scaffold(
-            body: SingleChildScrollView(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 800.0, //this is temporary
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/whiteBg.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: SafeArea(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width >= 700.0
-                            ? MediaQuery.of(context).size.height
-                            : 775.0,
-                        child: Card(
-                          margin: EdgeInsets.all(8.0),
-                          elevation: 8.0,
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
+        : */
+        Scaffold(
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 800.0, //this is temporary
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/whiteBg.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Container(
+                  width: MediaQuery.of(context).size.width >= 700.0
+                      ? MediaQuery.of(context).size.height
+                      : 775.0,
+                  child: Card(
+                    margin: EdgeInsets.all(8.0),
+                    elevation: 8.0,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          CircleAvatar(
+                            backgroundImage: NetworkImage(
+                              "https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/$userImage.png?alt=media",
+                            ),
+                            radius: 30.0,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                    "https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/$userImage.png?alt=media",
-                                  ),
-                                  radius: 30.0,
-                                ),
-                                Text(
-                                  'Welcome $userName!',
-                                  style: TextStyle(
-                                    fontFamily: 'George',
-                                    color: Colors.black,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                              ],
+                          Text(
+                            'Welcome $userName!',
+                            style: TextStyle(
+                              fontFamily: 'George',
+                              color: Colors.black,
+                              fontSize: 20.0,
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width >= 700.0
-                            ? MediaQuery.of(context).size.height
-                            : 775.0,
-                        child: Card(
-                          margin: EdgeInsets.all(8.0),
-                          elevation: 8.0,
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16.0),
-                                bottomLeft: Radius.circular(16.0),
-                                bottomRight: Radius.circular(16.0),
-                                topRight: Radius.circular(68.0)),
-                          ),
-                          child: Row(
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width >= 700.0
+                      ? MediaQuery.of(context).size.height
+                      : 775.0,
+                  child: Card(
+                    margin: EdgeInsets.all(8.0),
+                    elevation: 8.0,
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.0),
+                          bottomLeft: Radius.circular(16.0),
+                          bottomRight: Radius.circular(16.0),
+                          topRight: Radius.circular(68.0)),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Text(
-                                        'Some kind of text here',
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 12.0,
-                                    ),
-                                    CustomButton(
-                                      text: 'SUBMIT',
-                                      method: () async {
-                                        await getImage();
-                                        uploadImage();
-                                      },
-                                    ),
-                                  ],
+                              Container(
+                                child: Text(
+                                  'Some kind of text here',
+                                  style: TextStyle(color: Colors.black),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: CircularPercentIndicator(
-                                  radius: 90.0,
-                                  lineWidth: 7.0,
-                                  animation: true,
-                                  percent: entries / 3,
-                                  circularStrokeCap: CircularStrokeCap.round,
-                                  footer: Text(
-                                    'Entries Remaning',
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: 'George'),
-                                  ),
-                                  center: Text(
-                                    "$entries",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 30.0,
-                                    ),
-                                  ),
-                                  progressColor: Colors.black,
-                                ),
+                              SizedBox(
+                                height: 12.0,
+                              ),
+                              CustomButton(
+                                text: 'SUBMIT',
+                                method: () async {
+                                  await getImage();
+                                  uploadImage();
+                                },
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 6.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: new LinearGradient(
-                                  colors: [
-                                    Colors.black12,
-                                    Colors.black,
-                                  ],
-                                  begin: const FractionalOffset(0.0, 0.0),
-                                  end: const FractionalOffset(1.0, 1.0),
-                                  stops: [0.0, 1.0],
-                                  tileMode: TileMode.clamp),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: CircularPercentIndicator(
+                            radius: 90.0,
+                            lineWidth: 7.0,
+                            animation: true,
+                            percent: entries / 3,
+                            circularStrokeCap: CircularStrokeCap.round,
+                            footer: Text(
+                              'Entries Remaning',
+                              style: TextStyle(
+                                  color: Colors.grey, fontFamily: 'George'),
                             ),
-                            width: 100.0,
-                            height: 1.0,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Text(
-                              'Your submissions',
+                            center: Text(
+                              "$entries",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontFamily: 'George',
-                                fontSize: 18.0,
+                                fontSize: 30.0,
                               ),
                             ),
+                            progressColor: Colors.black,
                           ),
-                          //TODO: Change here
-                          Container(
-                            decoration: BoxDecoration(
-                              gradient: new LinearGradient(
-                                  colors: [
-                                    Colors.black,
-                                    Colors.black12,
-                                  ],
-                                  begin: const FractionalOffset(0.0, 0.0),
-                                  end: const FractionalOffset(1.0, 1.0),
-                                  stops: [0.0, 1.0],
-                                  tileMode: TileMode.clamp),
-                            ),
-                            width: 100.0,
-                            height: 1.0,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          StreamBuilder<fs.QuerySnapshot>(
-                            stream: fb
-                                .firestore()
-                                .collection('images')
-                                .where('user', '==', userEmail)
-                                .onSnapshot,
-                            builder: (context, snapshot) {
-                              List<Container> urlWidgets = [];
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    backgroundColor: Colors.grey,
-                                  ),
-                                );
-                              }
-                              final url = snapshot.data.docs;
-                              url.forEach((data) {
-                                final urlText = data.data()['url'];
-                                final urlWidget = Container(
-                                  margin: EdgeInsets.all(12.0),
-                                  width: 110,
-                                  height: 110,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    child: Image.network(
-                                      urlText,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                );
-                                urlWidgets.add(urlWidget);
-                              });
-                              return Row(
-                                children: urlWidgets,
-                              );
-                            },
-                          ),
-                          Container(),
-                        ],
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: 6.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: new LinearGradient(
+                            colors: [
+                              Colors.black12,
+                              Colors.black,
+                            ],
+                            begin: const FractionalOffset(0.0, 0.0),
+                            end: const FractionalOffset(1.0, 1.0),
+                            stops: [0.0, 1.0],
+                            tileMode: TileMode.clamp),
+                      ),
+                      width: 100.0,
+                      height: 1.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        'Your submissions',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'George',
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                    //TODO: Change here
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: new LinearGradient(
+                            colors: [
+                              Colors.black,
+                              Colors.black12,
+                            ],
+                            begin: const FractionalOffset(0.0, 0.0),
+                            end: const FractionalOffset(1.0, 1.0),
+                            stops: [0.0, 1.0],
+                            tileMode: TileMode.clamp),
+                      ),
+                      width: 100.0,
+                      height: 1.0,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    StreamBuilder<fs.QuerySnapshot>(
+                      stream: fb
+                          .firestore()
+                          .collection('images')
+                          .where('user', '==', userEmail)
+                          .onSnapshot,
+                      builder: (context, snapshot) {
+                        List<Container> urlWidgets = [];
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.grey,
+                            ),
+                          );
+                        }
+                        final url = snapshot.data.docs;
+                        url.forEach((data) {
+                          final urlText = data.data()['url'];
+                          final urlWidget = Container(
+                            margin: EdgeInsets.all(12.0),
+                            width: 110,
+                            height: 110,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16.0),
+                              child: Image.network(
+                                urlText,
+                                fit: BoxFit.fill,
+                                loadingBuilder: (context, child, progress) {
+                                  return progress == null
+                                      ? child
+                                      : Center(
+                                          child: LinearProgressIndicator(
+                                            value:
+                                                progress.cumulativeBytesLoaded /
+                                                    progress.expectedTotalBytes,
+                                          ),
+                                        );
+                                },
+                              ),
+                            ),
+                          );
+                          urlWidgets.add(urlWidget);
+                        });
+                        return Row(
+                          children: urlWidgets,
+                        );
+                      },
+                    ),
+                    Container(),
+                  ],
+                ),
+              ],
             ),
-          );
+          ),
+        ),
+      ),
+    );
   }
 }

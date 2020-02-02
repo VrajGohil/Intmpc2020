@@ -10,15 +10,6 @@ import 'classes/custom_text_card.dart';
 import 'classes/statcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-var blackLine = Padding(
-  padding: const EdgeInsets.all(8.0),
-  child: Container(
-    color: Colors.black.withOpacity(0.3),
-    height: 1.0,
-    width: 32.0,
-  ),
-);
-
 class HomePage extends KFDrawerContent {
   HomePage({
     Key key,
@@ -52,6 +43,19 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    final blackLine = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        color: Colors.black.withOpacity(0.4),
+        height: 1.0,
+        width: 32.0,
+      ),
+    );
+
+    final fontSize = MediaQuery.of(context).size.height <= 600.0
+        ? MediaQuery.of(context).size.height * 0.03
+        : 32.0;
+
     var _greyText = TextStyle(
         fontSize: 16.0, fontFamily: 'George', color: Colors.grey.shade700);
     return Scaffold(
@@ -139,7 +143,7 @@ class _HomePageState extends State<HomePage>
                     children: <Widget>[
                       CustomTextCard(
                         text:
-                            'Click on \"Participate Now\" button on homepage.',
+                            'Click on Participate Now button on homepage.',
                         number: '1.',
                       ),
                       CustomTextCard(
@@ -148,28 +152,30 @@ class _HomePageState extends State<HomePage>
                       ),
                       CustomTextCard(
                         text:
-                            'On the dashboard, click on \"Submit a photo\"\n and upload your entry.',
+                            'On the dashboard, click on \"Submit a photo\" and upload your entry.',
                         number: '3.',
                       ),
                       CustomTextCard(
                         text:
-                            'Ensure that you are able to see \nyour entry on your dashboard.',
+                            'Ensure that you are able to see your entry on your dashboard.',
                         number: '4.',
                       ),
                       CustomTextCard(
-                        text: 'You can submit total 3 entries so don\'t\nforget to utilise all three entries.',
+                        text:
+                            'You can submit total 3 entries so don\'tforget to utilise all three entries.',
                         number: '5.',
                       ),
                       CustomTextCard(
-                        text: 'Sit back and chill while we evaluate your entries.',
+                        text:
+                            'Sit back and chill while we evaluate your entries.',
                         number: '6.',
                       ),
                       Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: Text(
+                        child: SelectableText(
                           'IF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT contact@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.',
                           style:
-                              TextStyle(fontFamily: 'George', fontSize: 14.0),
+                              TextStyle(fontFamily: 'George', fontSize: 12.0),
                           textAlign: TextAlign.center,
                         ),
                       )
@@ -185,6 +191,17 @@ class _HomePageState extends State<HomePage>
                   child: Container(
                     child: Image.network(
                       'https://i.ibb.co/Mc7PGXM/d6627a6e27.gif',
+                      loadingBuilder: (context, child, progress) {
+                        return progress == null
+                            ? child
+                            : Center(
+                          child: LinearProgressIndicator(
+                            value:
+                            progress.cumulativeBytesLoaded /
+                                progress.expectedTotalBytes,
+                          ),
+                        );
+                      },
                       width: 300,
                       height: 300,
                     ),
@@ -272,6 +289,7 @@ class _HomePageState extends State<HomePage>
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
                 body: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -303,7 +321,19 @@ class _HomePageState extends State<HomePage>
                     Container(
                       child: InkWell(
                         child: Image.network(
-                            'https://i.ibb.co/1RnsL0j/intmpc2018.png'),
+                          'https://i.ibb.co/1RnsL0j/intmpc2018.png',
+                          loadingBuilder: (context, child, progress) {
+                            return progress == null
+                                ? child
+                                : Center(
+                              child: LinearProgressIndicator(
+                                value:
+                                progress.cumulativeBytesLoaded /
+                                    progress.expectedTotalBytes,
+                              ),
+                            );
+                          },
+                        ),
                         onTap: () => _launchURL('http://intmpc2018.gq'),
                       ),
                       width: 200,
@@ -349,6 +379,7 @@ class _HomePageState extends State<HomePage>
                       fit: BoxFit.fill),
                 ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     InkWell(
                       onTap: () => _controller.animateToPage(0,
@@ -369,10 +400,10 @@ class _HomePageState extends State<HomePage>
                       onTap: () => _controller.animateToPage(0,
                           duration: Duration(seconds: 2), curve: Curves.linear),
                       child: Text(
-                        '  Homepage  ',
+                        'Homepage',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 32.0,
+                            fontSize: fontSize,
                             fontFamily: 'George'),
                       ),
                     ),
@@ -384,7 +415,7 @@ class _HomePageState extends State<HomePage>
                         'How to enter',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 32.0,
+                            fontSize: fontSize,
                             fontFamily: 'George'),
                       ),
                     ),
@@ -393,10 +424,10 @@ class _HomePageState extends State<HomePage>
                       onTap: () => _controller.animateToPage(2,
                           duration: Duration(seconds: 2), curve: Curves.linear),
                       child: Text(
-                        '    Awards    ',
+                        'Awards',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 32.0,
+                            fontSize: fontSize,
                             fontFamily: 'George'),
                       ),
                     ),
@@ -408,7 +439,7 @@ class _HomePageState extends State<HomePage>
                         'Sponsor spot',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 32.0,
+                            fontSize: fontSize,
                             fontFamily: 'George'),
                       ),
                     ),
@@ -417,10 +448,10 @@ class _HomePageState extends State<HomePage>
                       onTap: () => _controller.animateToPage(4,
                           duration: Duration(seconds: 2), curve: Curves.linear),
                       child: Text(
-                        '     Jury     ',
+                        'Jury',
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 32.0,
+                            fontSize: fontSize,
                             fontFamily: 'George'),
                       ),
                     ),
@@ -469,15 +500,16 @@ class _HomePageState extends State<HomePage>
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
+                    FractionallySizedBox(),
                     SelectableText(
                       'Privacy Policy',
                       style: _greyText,
-                      onTap: () => _launchURL('https://intmpc2020.co/privacy_policy'),
+                      onTap: () => _launchURL(
+                          'https://intmpc2020.co/privacy_policy.html'),
                     ),
-                    SizedBox(height: 2.0,),
+                    SizedBox(
+                      height: 2.0,
+                    ),
                     SelectableText(
                       'Email: contact@intmpc2020.co',
                       style: _greyText,
@@ -493,7 +525,7 @@ class _HomePageState extends State<HomePage>
                           style: TextStyle(
                               color: Colors.black,
                               fontFamily: 'George',
-                              fontSize: 22.0),
+                              fontSize: 16.0),
                         ),
                       ),
                     ),
