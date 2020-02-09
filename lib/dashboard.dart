@@ -8,8 +8,10 @@ import 'classes/countdown.dart';
 import 'classes/custom_button.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
-import 'package:flutter_web_image_picker/flutter_web_image_picker.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'classes/web_image_picker.dart';
 
 //TODO: Make List to add widgets to column.
 class Dashboard extends StatefulWidget {

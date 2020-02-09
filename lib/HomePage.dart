@@ -22,6 +22,10 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   PageController _controller;
   bool isPlaying = false;
+  int _currentPage = 0;
+  int t; //Tid
+  double p; //Position
+
   @override
   void initState() {
     super.initState();
@@ -142,8 +146,7 @@ class _HomePageState extends State<HomePage>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CustomTextCard(
-                        text:
-                            'Click on Participate Now button on homepage.',
+                        text: 'Click on Participate Now button on homepage.',
                         number: '1.',
                       ),
                       CustomTextCard(
@@ -162,7 +165,7 @@ class _HomePageState extends State<HomePage>
                       ),
                       CustomTextCard(
                         text:
-                            'You can submit total 3 entries so don\'tforget to utilise all three entries.',
+                            'You can submit total 3 entries so don\'t forget to utilise all three entries.',
                         number: '5.',
                       ),
                       CustomTextCard(
@@ -195,12 +198,11 @@ class _HomePageState extends State<HomePage>
                         return progress == null
                             ? child
                             : Center(
-                          child: LinearProgressIndicator(
-                            value:
-                            progress.cumulativeBytesLoaded /
-                                progress.expectedTotalBytes,
-                          ),
-                        );
+                                child: LinearProgressIndicator(
+                                  value: progress.cumulativeBytesLoaded /
+                                      progress.expectedTotalBytes,
+                                ),
+                              );
                       },
                       width: 300,
                       height: 300,
@@ -232,15 +234,18 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-                          address: 'assets/alina.jpg',
+//                          address: 'assets/alina.jpg',
+                          network: 'https://i.ibb.co/tqzXGbH/alina.jpg',
                           name: 'Alina Dotsenko',
                         ),
                         CircleDp(
-                          address: 'assets/muhammad.jpg',
+//                          address: 'assets/muhammad.jpg',
+                          network: 'https://i.ibb.co/0njyfbw/muhammad.jpg',
                           name: 'Muhammad Otib',
                         ),
                         CircleDp(
-                          address: 'assets/tapan.jpg',
+//                          address: 'assets/tapan.jpg',
+                          network: 'https://i.ibb.co/TL7zDft/tapan.jpg',
                           name: 'Tapan Sheth',
                         ),
                       ],
@@ -248,19 +253,23 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-                          address: 'assets/bill.jpg',
+//                          address: 'assets/bill.jpg',
+                          network: 'https://i.ibb.co/TrpbWjP/bill.jpg',
                           name: 'Dr. Bill Chu',
                         ),
                         CircleDp(
-                          address: 'assets/peter.jpg',
+//                          address: 'assets/peter.jpg',
+                          network: 'https://i.ibb.co/H71xkp6/peter.jpg',
                           name: 'Peter Wyss',
                         ),
                         CircleDp(
-                          address: 'assets/thamaphon.jpg',
+//                          address: 'assets/thamaphon.jpg',
+                          network: 'https://i.ibb.co/8B3BnG6/thamaphon.jpg',
                           name: 'Thamaphon Suwankosai',
                         ),
                         CircleDp(
-                          address: 'assets/yan.jpg',
+//                          address: 'assets/yan.jpg',
+                          network: 'https://i.ibb.co/TLRfT5h/yan.jpg',
                           name: 'Yan Hidayat',
                         ),
                       ],
@@ -268,15 +277,18 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-                          address: 'assets/karen.jpg',
+//                          address: 'assets/karen.jpg',
+                          network: 'https://i.ibb.co/6Hxm7qt/karen.jpg',
                           name: 'Karen Brewer',
                         ),
                         CircleDp(
-                          address: 'assets/raj.jpg',
+//                          address: 'assets/raj.jpg',
+                          network: 'https://i.ibb.co/qgTy4XQ/raj.jpg',
                           name: 'Raj Bheda',
                         ),
                         CircleDp(
-                          address: 'assets/vraj.jpg',
+//                          address: 'assets/vraj.jpg',
+                          network: 'https://i.ibb.co/SRzXZrv/vraj.jpg',
                           name: 'Vraj Gohil',
                         ),
                       ],
@@ -326,12 +338,11 @@ class _HomePageState extends State<HomePage>
                             return progress == null
                                 ? child
                                 : Center(
-                              child: LinearProgressIndicator(
-                                value:
-                                progress.cumulativeBytesLoaded /
-                                    progress.expectedTotalBytes,
-                              ),
-                            );
+                                    child: LinearProgressIndicator(
+                                      value: progress.cumulativeBytesLoaded /
+                                          progress.expectedTotalBytes,
+                                    ),
+                                  );
                           },
                         ),
                         onTap: () => _launchURL('http://intmpc2018.gq'),
