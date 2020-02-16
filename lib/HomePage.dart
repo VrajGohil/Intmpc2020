@@ -5,8 +5,10 @@ import 'package:kf_drawer/kf_drawer.dart';
 import 'package:scrolling_page_indicator/scrolling_page_indicator.dart';
 import 'package:intmpc/classes/custom_button.dart';
 import 'classes/circledp.dart';
+import 'classes/company.dart';
 import 'classes/custom_page.dart';
 import 'classes/custom_text_card.dart';
+import 'classes/sliding_cards_view.dart';
 import 'classes/statcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -68,6 +70,7 @@ class _HomePageState extends State<HomePage>
         children: <Widget>[
           PageView(
             controller: _controller,
+            physics: ClampingScrollPhysics(),
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
@@ -190,38 +193,79 @@ class _HomePageState extends State<HomePage>
                 title: 'Awards',
                 imagePath: 'assets/whiteBg.png',
                 fontColor: Colors.black,
-                body: Center(
-                  child: Container(
-                    child: Image.network(
-                      'https://i.ibb.co/Mc7PGXM/d6627a6e27.gif',
-                      loadingBuilder: (context, child, progress) {
-                        return progress == null
-                            ? child
-                            : Center(
-                                child: LinearProgressIndicator(
-                                  value: progress.cumulativeBytesLoaded /
-                                      progress.expectedTotalBytes,
-                                ),
-                              );
-                      },
-                      width: 300,
-                      height: 300,
-                    ),
-                  ),
+                body: Container(
+                  child: SlidingCardsView(),
                 ),
               ),
               CustomPage(
                 title: 'Sponsors',
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
-                body: Center(
-                  child: Container(
-                    child: Image.network(
-                      'https://i.ibb.co/NpZ413K/883ab47915.gif',
-                      width: 300,
-                      height: 300,
+                body: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: Card(
+                          elevation: 24.0,
+                          color: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Text(
+                                  'We are thrilled to be partnering with some best brands to award the winners of International Macro Photography Contest 2020 some awesome prizes.\n\nAlthough we work hard, a big part of making this possible lies in the hands of our sponsors and partners so we can proudly say that these are the companies that make everything possible.If you\'re interested in sponsoring alongside these companies, please get in touch with us!',
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'George'),
+                                ),
+                              ),
+                            ),
+                          )),
                     ),
-                  ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Company(
+                          network:
+                              'https://i.ibb.co/vvzFLwj/20200216-161353-0000.png',
+                          onTap: () => _launchURL(
+                              'https://www.shopmoment.com/'),
+                        ),
+                        Company(
+                          network:
+                          'https://i.ibb.co/DkpmVSg/20200216-161900-0000.png',
+                          onTap: () => _launchURL(
+                              'https://www.heliconsoft.com/'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Company(
+                          network: 'https://i.ibb.co/nkJtySy/20200216-161648-0000.png',
+                          onTap: () => _launchURL(
+                              'https://www.sandmarc.com/'),
+                        ),
+                        Company(
+                          network: 'https://i.ibb.co/qCq7fH1/20200216-161434-0000.png',
+                          onTap: () => _launchURL(
+                              'https://www.on1.com/'),
+                        ),
+                      ],
+                    ),
+                    Company(
+                      network: 'https://i.ibb.co/7YQ7h5W/20200216-161615-0000.png',
+                      onTap: () => _launchURL(
+                          'https://photoguild.co.uk/'),
+                    ),
+                  ],
                 ),
               ),
               CustomPage(

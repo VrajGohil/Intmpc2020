@@ -11,6 +11,7 @@ import 'package:firebase/firestore.dart' as fs;
 
 import 'package:http/http.dart' as http;
 
+import 'classes/tips.dart';
 import 'classes/web_image_picker.dart';
 
 //TODO: Make List to add widgets to column.
@@ -69,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
   Future<void> startUpload() async {
     print(base64Image);
     http.post(
-        'https://api.imgbb.com/1/upload?key=6b908e80517e7a275075491546164b43',
+        'https://api.imgbb.com/1/upload?key=142055a16fde09fbe596c9336989f15e',
         body: {
           "image": base64Image,
         }).then((res) async {
@@ -83,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
       await fb
           .firestore()
           .collection('images')
-          .add({'url': url, 'user': userEmail});
+          .add({'url': url, 'user': userEmail, 'likes': 0, 'score': 0});
       print(url);
       await fb.firestore().collection('users').doc(userEmail).update(
         data: {'entries': entries},
@@ -222,12 +223,12 @@ class _DashboardState extends State<Dashboard> {
     print(difference);
     return /*-difference.inSeconds > 0
         ? _countdownTimer(-difference)
-        : */
-        Scaffold(
+        :
+        */Scaffold(
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 800.0, //this is temporary
+          height: MediaQuery.of(context).size.height, //this is temporary
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/whiteBg.png'),
@@ -293,23 +294,36 @@ class _DashboardState extends State<Dashboard> {
                       children: <Widget>[
                         Expanded(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Container(
                                 child: Text(
-                                  'Some kind of text here',
-                                  style: TextStyle(color: Colors.black),
+                                  'Tips by winners',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'George'),
                                 ),
                               ),
                               SizedBox(
-                                height: 12.0,
+                                height: 16.0,
                               ),
-                              CustomButton(
-                                text: 'SUBMIT',
-                                method: () async {
-                                  await getImage();
-                                  uploadImage();
-                                },
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Tips(
+                                    name: '- Angela Manalili : 1st ranker',
+                                    network: 'https://i.ibb.co/c8j795B/angmana.jpg',
+                                    text: '- Keep your eyes open: you never know when you’ll come across that winning image. \n\n- Don’t be afraid to put yourself out there. Take a risk & enter the contest. I almost didn’t submit an entry \n\n- I didn’t believe my images would be good enough to win. You can’t win if you don’t enter! \n\n- Keep practicing & experiment with different camera settings and post-processing techniques. Think outside the box & be creative.',
+                                  ),
+                                  SizedBox(
+                                    width: 12.0,
+                                  ),
+                                  Tips(
+                                    name: '- Alina Dotsenko : 2nd ranker',
+                                    network: 'https://i.ibb.co/tqzXGbH/alina.jpg',
+                                    text: 'First of all, believe in yourself and send your photos to participate in the contest. Perhaps you already have ready-made photos or are just going to take photos, choose the best ones, consult with your friends, as it often happens that the majority will choose a completely different photo than you thought. \nAnd most important, remember that great photograph is about interesting light, color and composition. The subject may be simple, but light can create an atmosphere, turn an object into something magical or unusual. In my macro photography I often use additional light sources and some shiny backgrounds to create bokeh, I focus on the details and planning composition. I wish you all good luck and may the light be with you.',
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -340,6 +354,39 @@ class _DashboardState extends State<Dashboard> {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 12.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CustomButton(
+                      text: 'SUBMIT',
+                      tag: 'button1',
+                      method: () async {
+                        await getImage();
+                        uploadImage();
+                      },
+                    ),
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    CustomButton(
+                      tag: 'button2',
+                      method: (){
+                        Navigator.pushNamed(context, '/rules');
+                      },
+                      text: 'Rules',
+                    ),
+                    SizedBox(
+                      width: 8.0,
+                    ),
+                    CustomButton(
+                      tag: 'button3',
+                      text: 'Results',
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 6.0,

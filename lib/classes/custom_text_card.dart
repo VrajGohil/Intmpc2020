@@ -32,10 +32,13 @@ class CustomTextCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: Text(
-                    text,
-                    style: TextStyle(color: Colors.white, fontFamily: 'George'),
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Text(
+                      text,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(color: Colors.white, fontFamily: 'George'),
+                    ),
                   ),
                 ),
               )),

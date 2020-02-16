@@ -36,7 +36,7 @@ class CircleDp extends StatelessWidget {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            color: Colors.white,
+                            color: Colors.white.withOpacity(0.7),
                             alignment: Alignment.center,
                             child: Material(
                                 color: Colors.redAccent.withOpacity(0.0),
@@ -45,33 +45,20 @@ class CircleDp extends StatelessWidget {
                                     print("click");
                                     Navigator.pop(context);
                                   },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Center(
-                                        child: Text(
-                                          name,
-                                          style: TextStyle(
-                                              fontFamily: 'George',
-                                              color: Colors.black),
-                                        ),
+                                  child: Hero(
+                                    tag: name,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CircleAvatar(
+                                        radius: MediaQuery.of(context)
+                                                .size
+                                                .height *
+                                            0.20,
+                                        backgroundImage: getImage(),
                                       ),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      Hero(
-                                        tag: name,
-                                        child: CircleAvatar(
-                                          radius: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.15,
-                                          backgroundImage: getImage(),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                )),
+                                ),),
                           ),
                         ),
                       );
