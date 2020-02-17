@@ -80,7 +80,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
           style: TextStyle(color: Colors.white,fontFamily: 'George'),
         ),
         icon: Icon(Icons.receipt, color: Colors.white),
-        onPressed: () => Navigator.pushNamed(context, '/dashboard'),
+        onPressed: () => Navigator.pushNamed(context, '/rules'),
       ),
     );
   }
