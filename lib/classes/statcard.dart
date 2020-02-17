@@ -16,11 +16,17 @@ class StatCard extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 58.0,
-            width: 100.0,
+//            width: 100.0,
+            width: MediaQuery.of(context).size.width >= 650.0
+                ? 100
+                : MediaQuery.of(context).size.width * 0.25,
             child: Center(
               child: Text(numdata,
                   style: TextStyle(
-                    fontSize: 40.0,
+//                    fontSize: 40.0,
+                    fontSize: MediaQuery.of(context).size.height >= 650.0
+                        ? 40
+                        : 30,
                     fontFamily: 'George',
                   ),
                 ),

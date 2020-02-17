@@ -38,7 +38,10 @@ class CustomPage extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'George',
                         color: fontColor,
-                        fontSize: 42.0,
+//                        fontSize: 42.0,
+                        fontSize: MediaQuery.of(context).size.height >= 600.0
+                            ? 42.0
+                            : 30.0,
                       ),
                     ),
                   ),

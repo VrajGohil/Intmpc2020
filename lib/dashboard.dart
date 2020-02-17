@@ -8,8 +8,11 @@ import 'classes/countdown.dart';
 import 'classes/custom_button.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:firebase/firestore.dart' as fs;
-import 'package:flutter_web_image_picker/flutter_web_image_picker.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'classes/tips.dart';
+import 'classes/web_image_picker.dart';
 
 //TODO: Make List to add widgets to column.
 class Dashboard extends StatefulWidget {
@@ -37,7 +40,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void streamTest() async {
-    final response = await http.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
+    final response =
+        await http.get('http://worldtimeapi.org/api/timezone/Asia/Kolkata');
     print(jsonDecode(response.body));
     setState(() {
       _currentTime = DateTime.parse(jsonDecode(response.body)['utc_datetime']);
@@ -66,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
   Future<void> startUpload() async {
     print(base64Image);
     http.post(
-        'https://api.imgbb.com/1/upload?key=6b908e80517e7a275075491546164b43',
+        'https://api.imgbb.com/1/upload?key=142055a16fde09fbe596c9336989f15e',
         body: {
           "image": base64Image,
         }).then((res) async {
@@ -80,7 +84,7 @@ class _DashboardState extends State<Dashboard> {
       await fb
           .firestore()
           .collection('images')
-          .add({'url': url, 'user': userEmail});
+          .add({'url': url, 'user': userEmail, 'likes': 0, 'score': 0});
       print(url);
       await fb.firestore().collection('users').doc(userEmail).update(
         data: {'entries': entries},
@@ -165,6 +169,7 @@ class _DashboardState extends State<Dashboard> {
       print("Username is $userName");
     });
   }
+
   _countdownTimer(Duration duration) {
     return Scaffold(
       body: Container(
@@ -174,7 +179,7 @@ class _DashboardState extends State<Dashboard> {
         ),
         child: Center(
           child: CountdownFormatted(
-            onFinish: (){
+            onFinish: () {
               print('finished');
             },
             duration: duration,
@@ -182,7 +187,8 @@ class _DashboardState extends State<Dashboard> {
               return Card(
                 elevation: 20.0,
                 color: Colors.grey.withOpacity(0.1),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0)),
                 child: Container(
                   width: 370.0,
                   height: 200.0,
@@ -190,7 +196,10 @@ class _DashboardState extends State<Dashboard> {
                     child: Text(
                       remaining,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontFamily: 'George', fontSize: 60.0,color: Colors.black),
+                      style: TextStyle(
+                          fontFamily: 'George',
+                          fontSize: 60.0,
+                          color: Colors.black),
                     ),
                   ),
                 ),
@@ -218,7 +227,7 @@ class _DashboardState extends State<Dashboard> {
             body: SingleChildScrollView(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 800.0, //this is temporary
+                height: MediaQuery.of(context).size.height, //this is temporary
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/whiteBg.png'),
@@ -285,23 +294,43 @@ class _DashboardState extends State<Dashboard> {
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: <Widget>[
                                     Container(
                                       child: Text(
-                                        'Some kind of text here',
-                                        style: TextStyle(color: Colors.black),
+                                        'Tips by past winners',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'George'),
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 12.0,
+                                      height: 16.0,
                                     ),
-                                    CustomButton(
-                                      text: 'SUBMIT',
-                                      method: () async {
-                                        await getImage();
-                                        uploadImage();
-                                      },
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Tips(
+                                          name:
+                                              '- Angela Manalil\n1st ranker (2018)',
+                                          network:
+                                              'https://i.ibb.co/c8j795B/angmana.jpg',
+                                          text:
+                                              '- Keep your eyes open: you never know when you’ll come across that winning image. \n\n- Don’t be afraid to put yourself out there. Take a risk & enter the contest. I almost didn’t submit an entry \n\n- I didn’t believe my images would be good enough to win. You can’t win if you don’t enter! \n\n- Keep practicing & experiment with different camera settings and post-processing techniques. Think outside the box & be creative.',
+                                        ),
+                                        SizedBox(
+                                          width: 12.0,
+                                        ),
+                                        Tips(
+                                          name:
+                                              '- Alina Dotsenko\n2nd ranker (2018)',
+                                          network:
+                                              'https://i.ibb.co/tqzXGbH/alina.jpg',
+                                          text:
+                                              'First of all, believe in yourself and send your photos to participate in the contest. Perhaps you already have ready-made photos or are just going to take photos, choose the best ones, consult with your friends, as it often happens that the majority will choose a completely different photo than you thought. \nAnd most important, remember that great photograph is about interesting light, color and composition. The subject may be simple, but light can create an atmosphere, turn an object into something magical or unusual. In my macro photography I often use additional light sources and some shiny backgrounds to create bokeh, I focus on the details and planning composition. I wish you all good luck and may the light be with you.',
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -333,6 +362,39 @@ class _DashboardState extends State<Dashboard> {
                             ],
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 12.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          CustomButton(
+                            text: 'Upload',
+                            tag: 'button1',
+                            method: () async {
+                              await getImage();
+                              uploadImage();
+                            },
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          CustomButton(
+                            tag: 'button2',
+                            method: () {
+                              Navigator.pushNamed(context, '/rules');
+                            },
+                            text: 'Rules',
+                          ),
+                          SizedBox(
+                            width: 8.0,
+                          ),
+                          CustomButton(
+                            tag: 'button3',
+                            text: 'Results',
+                          ),
+                        ],
                       ),
                       SizedBox(
                         height: 6.0,
@@ -414,6 +476,19 @@ class _DashboardState extends State<Dashboard> {
                                     child: Image.network(
                                       urlText,
                                       fit: BoxFit.fill,
+                                      loadingBuilder:
+                                          (context, child, progress) {
+                                        return progress == null
+                                            ? child
+                                            : Center(
+                                                child: LinearProgressIndicator(
+                                                  value: progress
+                                                          .cumulativeBytesLoaded /
+                                                      progress
+                                                          .expectedTotalBytes,
+                                                ),
+                                              );
+                                      },
                                     ),
                                   ),
                                 );

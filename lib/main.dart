@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/HomePage.dart';
+import 'package:intmpc/rules.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'dashboard.dart';
 import 'login_page.dart';
@@ -19,6 +20,7 @@ void main() {
         '/': (context) => MainWidget(),
         '/login': (context) => LoginPage(),
         '/dashboard': (context) => Dashboard(),
+        '/rules': (context) => Rules(),
       },
       initialRoute: '/',
 //      home: MainWidget(),
@@ -71,6 +73,16 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
     super.initState();
     _drawerController =
         KFDrawerController(initialPage: HomePage(), items: items);
+    items.add(
+      KFDrawerItem.initWithPage(
+        text: Text(
+          'RULES',
+          style: TextStyle(color: Colors.white,fontFamily: 'George'),
+        ),
+        icon: Icon(Icons.receipt, color: Colors.white),
+        onPressed: () => Navigator.pushNamed(context, '/rules'),
+      ),
+    );
   }
 
   @override

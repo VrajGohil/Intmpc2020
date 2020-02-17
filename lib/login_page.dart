@@ -355,16 +355,6 @@ class _LoginPageState extends State<LoginPage>
           ),
           Padding(
             padding: EdgeInsets.only(top: 10.0),
-            child: FlatButton(
-                onPressed: () {},
-                child: Text(
-                  "Forgot Password?",
-                  style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.black,
-                      fontSize: 16.0,
-                      fontFamily: "George"),
-                )),
           ),
           Padding(
             padding: EdgeInsets.only(top: 10.0),
@@ -414,92 +404,61 @@ class _LoginPageState extends State<LoginPage>
               ],
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 10.0, right: 40.0),
-                child: GestureDetector(
-                  onTap: () => showInSnackBar("Facebook button pressed"),
-                  child: Container(
-                    padding: const EdgeInsets.all(15.0),
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    child: new Icon(
-                      FontAwesomeIcons.facebookF,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0, right: 40.0),
-                child: GestureDetector(
-                  onTap: () => showInSnackBar("Facebook button pressed"),
-                  child: Container(
-                    padding: const EdgeInsets.all(15.0),
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    child: new Icon(
-                      FontAwesomeIcons.twitter,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  onTap: () async {
-                    setState(() {
-                      isLoading = true;
+          Center(
+            child: Padding(
+              padding: EdgeInsets.only(top: 10.0),
+              child: GestureDetector(
+                onTap: () async {
+                  setState(() {
+                    isLoading = true;
+                  });
+                  final GoogleSignInAccount googleUser =
+                      await _googleSignIn.signIn();
+                  final GoogleSignInAuthentication googleAuth =
+                      await googleUser.authentication;
+                  final AuthCredential credential =
+                      GoogleAuthProvider.getCredential(
+                    accessToken: googleAuth.accessToken,
+                    idToken: googleAuth.idToken,
+                  );
+                  int userImage = Random().nextInt(9);
+                  final FirebaseUser user =
+                      (await _auth.signInWithCredential(credential)).user;
+                  if (user.email != null) {
+                    await fb
+                        .firestore()
+                        .collection('users')
+                        .doc(user.email)
+                        .set({
+                      'name': user.displayName,
+                      'entries': 3,
+                      'dp': userImage
                     });
-                    final GoogleSignInAccount googleUser =
-                        await _googleSignIn.signIn();
-                    final GoogleSignInAuthentication googleAuth =
-                        await googleUser.authentication;
-                    final AuthCredential credential =
-                        GoogleAuthProvider.getCredential(
-                      accessToken: googleAuth.accessToken,
-                      idToken: googleAuth.idToken,
-                    );
-                    int userImage = Random().nextInt(9);
-                      final FirebaseUser user =
-                          (await _auth.signInWithCredential(credential)).user;
-                      if (user.email != null) {
-                        await fb
-                            .firestore()
-                            .collection('users')
-                            .doc(user.email)
-                            .set({
-                          'name': user.displayName,
-                          'entries': 3,
-                          'dp': userImage
-                        });
-                        Navigator.pushNamed(context, '/dashboard');
-                      }
-                      setState(() {
-                        isLoading = false;
-                      });
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(15.0),
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.black,
-                    ),
-                    child: new Icon(
-                      FontAwesomeIcons.google,
+                    Navigator.pushNamed(context, '/dashboard');
+                  }
+                  setState(() {
+                    isLoading = false;
+                  });
+                },
+                child: Container(
+                  width: 140.0,
+                  padding: const EdgeInsets.all(15.0),
+                  decoration: new BoxDecoration(
+                    borderRadius: BorderRadius.circular(36.0),
+                    color: Colors.black,
+                  ),
+                  child: Text(
+                    'Google',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: 'George',
                       color: Colors.white,
+                      fontSize: 24.0,
                     ),
                   ),
                 ),
               ),
-            ],
+            ),
           ),
         ],
       ),
