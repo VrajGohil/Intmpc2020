@@ -98,7 +98,7 @@ class SlidingCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: 200.0,
+            height: MediaQuery.of(context).size.height * 0.2,
             child: Image.network(
               rank,
               fit: BoxFit.fitHeight,

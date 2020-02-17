@@ -73,6 +73,16 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
     super.initState();
     _drawerController =
         KFDrawerController(initialPage: HomePage(), items: items);
+    items.add(
+      KFDrawerItem.initWithPage(
+        text: Text(
+          'RULES',
+          style: TextStyle(color: Colors.white,fontFamily: 'George'),
+        ),
+        icon: Icon(Icons.receipt, color: Colors.white),
+        onPressed: () => Navigator.pushNamed(context, '/dashboard'),
+      ),
+    );
   }
 
   @override

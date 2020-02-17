@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage>
                       ),
                       CustomTextCard(
                         text:
-                            'On the dashboard, click on \"Submit a photo\" and upload your entry.',
+                            'On the dashboard, click on \"Upload\" and submit your entry.',
                         number: '3.',
                       ),
                       CustomTextCard(
@@ -205,7 +205,7 @@ class _HomePageState extends State<HomePage>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       child: Card(
                           elevation: 24.0,
                           color: Colors.transparent,
@@ -222,14 +222,14 @@ class _HomePageState extends State<HomePage>
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontFamily: 'George'),
+                                      fontFamily: 'George',fontSize: 12.0),
                                 ),
                               ),
                             ),
                           )),
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Company(
                           network:
@@ -246,7 +246,7 @@ class _HomePageState extends State<HomePage>
                       ],
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Company(
                           network: 'https://i.ibb.co/nkJtySy/20200216-161648-0000.png',

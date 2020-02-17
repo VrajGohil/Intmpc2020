@@ -13,6 +13,7 @@
 *.iml
 *.ipr
 *.iws
+index.html
 .idea/
 
 # The .vscode folder contains launch configuration and tasks you configure in

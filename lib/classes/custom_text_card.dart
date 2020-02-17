@@ -37,7 +37,7 @@ class CustomTextCard extends StatelessWidget {
                     child: Text(
                       text,
                       textAlign: TextAlign.justify,
-                      style: TextStyle(color: Colors.white, fontFamily: 'George'),
+                      style: TextStyle(color: Colors.white, fontFamily: 'George',fontSize: MediaQuery.of(context).size.height < 650 ? 12.0 : 16.0),
                     ),
                   ),
                 ),
