@@ -28,7 +28,7 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
   }
 
   void _animateSlider() {
-    Future.delayed(Duration(seconds: 2)).then((_) {
+    Future.delayed(Duration(seconds: 5)).then((_) {
       int nextPage = pageController.page.round() + 1;
 
       if (nextPage == content.length) {
@@ -47,27 +47,48 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
     content = [
       SlidingCard(
         name:
-            '\$250 Credit at shopmoment.co and Helicon Focus Pro lifetime license worth \$200',
-        network: 'https://i.ibb.co/JnPhwfC/20200209-180659-0000.png',
+            '\$250 Credit at shopmoment.co, Helicon Focus Pro lifetime license worth \$200 and 1 year standard membership from The Guild of Photographers worth \$99',
+        network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize1.jpeg?alt=media&token=7fb00ed3-63d1-48a9-aafd-b568b279d707',
         offset: pageOffset,
-        rank: 'https://i.ibb.co/S0CKHb6/rank1.png',
+        rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank1.png?alt=media&token=36c1b653-78cd-42e2-9d57-c3ad3a24b60d',
       ),
       SlidingCard(
           name:
               '\$200 Credit at shopmoment.co and Helicon Focus Pro lifetime license worth \$200',
-          network: 'https://i.ibb.co/whMTdt4/20200215-164232-0000.png',
+          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_2.png?alt=media&token=193a4b07-fc36-423e-b7c7-4b7517d64227',
           offset: pageOffset - 1,
-          rank: 'https://i.ibb.co/N1TM8Fj/rank2.png'),
+          rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank2.png?alt=media&token=a0e5aa2a-d148-465b-9b5b-3a366c766ce4'),
       SlidingCard(
         name:
-            '\$Macro lens from Sandmarc and Helicon Focus Pro lifetime license worth \$200',
-        network: 'https://i.ibb.co/hYfbNsB/20200215-174904-0000.png',
+            'Macro lens from Sandmarc and Helicon Focus Pro lifetime license worth \$200',
+        network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_3.png?alt=media&token=095b8037-d663-4f9a-8874-63f61c2e27eb',
         offset: pageOffset - 2,
-        rank: 'https://i.ibb.co/THbMZqZ/rank3.png',
+        rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank3.png?alt=media&token=9a74de3c-4f44-4f26-899c-7af4b1e63d2b',
+      ),
+      SlidingCard(
+        name:
+        'Helicon Focus Pro lifetime license worth \$200 for the most active participent of the event',
+        network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_4_5.jpeg?alt=media&token=ad4ee802-4c75-4a9d-9551-b2e6a748ae56',
+        offset: pageOffset - 3,
+        rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank4.png?alt=media&token=c40136ce-e530-4458-b7da-38c218a38b53',
+      ),
+      SlidingCard(
+        name:
+        'Helicon Focus Pro lifetime license worth \$200',
+        network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_4_5.jpeg?alt=media&token=ad4ee802-4c75-4a9d-9551-b2e6a748ae56',
+        offset: pageOffset - 4,
+        rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank5.png?alt=media&token=c298c9d3-a1fb-4dca-b20b-bd609c29e9b9',
+      ),
+      SlidingCard(
+        name:
+        'ON1 Photo Raw 2020 worth \$100',
+        network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/bonus_prize.jpeg?alt=media&token=662bf0a7-663c-4b53-861a-5eca2521b98c',
+        offset: pageOffset - 5,
+        rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/bonus.png?alt=media&token=cce8821d-0e66-4fbb-9f5a-5dc046edd097',
       ),
     ];
     return Container(
-      height: 400.0,
+//      height: 400.0,
       child: PageView(
         controller: pageController,
         children: content,
@@ -112,13 +133,13 @@ class SlidingCard extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
             child: Container(
               width: 400,
-              height: 180,
+              height: 200,
               child: Image.network(
                 network,
 //              height: MediaQuery.of(context).size.height * 0.3,
 //              width: MediaQuery.of(context).size.width * 0.9,
                 alignment: Alignment(-offset.abs(), 0),
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
                 loadingBuilder: (context, child, progress) {
                   return progress == null
                       ? child

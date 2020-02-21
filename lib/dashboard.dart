@@ -315,7 +315,7 @@ class _DashboardState extends State<Dashboard> {
                                           name:
                                               '- Angela Manalil\n1st ranker (2018)',
                                           network:
-                                              'https://i.ibb.co/c8j795B/angmana.jpg',
+                                              'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/angmana.jpg?alt=media&token=2735a809-2959-439c-9419-88b575512078',
                                           text:
                                               '- Keep your eyes open: you never know when you’ll come across that winning image. \n\n- Don’t be afraid to put yourself out there. Take a risk & enter the contest. I almost didn’t submit an entry \n\n- I didn’t believe my images would be good enough to win. You can’t win if you don’t enter! \n\n- Keep practicing & experiment with different camera settings and post-processing techniques. Think outside the box & be creative.',
                                         ),
@@ -326,7 +326,7 @@ class _DashboardState extends State<Dashboard> {
                                           name:
                                               '- Alina Dotsenko\n2nd ranker (2018)',
                                           network:
-                                              'https://i.ibb.co/tqzXGbH/alina.jpg',
+                                              'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/alina.jpg?alt=media&token=34db8a14-a027-4d8f-a39a-b4b19db04b1d',
                                           text:
                                               'First of all, believe in yourself and send your photos to participate in the contest. Perhaps you already have ready-made photos or are just going to take photos, choose the best ones, consult with your friends, as it often happens that the majority will choose a completely different photo than you thought. \nAnd most important, remember that great photograph is about interesting light, color and composition. The subject may be simple, but light can create an atmosphere, turn an object into something magical or unusual. In my macro photography I often use additional light sources and some shiny backgrounds to create bokeh, I focus on the details and planning composition. I wish you all good luck and may the light be with you.',
                                         ),

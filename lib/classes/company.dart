@@ -9,14 +9,10 @@ class Company extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Card(
-        child: Container(
-            child: Image.network(network,fit: BoxFit.fill,),
-            width: MediaQuery.of(context).size.width < 600 ? MediaQuery.of(context).size.width * 0.40 : 240,
-            height: MediaQuery.of(context).size.height < 800 ? MediaQuery.of(context).size.height * 0.12 : 120),
-        elevation: 8.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-      ),
+      child: Container(
+          child: Image.network(network,fit: BoxFit.fill,),
+          width: MediaQuery.of(context).size.height < 700 ? MediaQuery.of(context).size.height * 0.15 : MediaQuery.of(context).size.height * 0.18,
+          height:  MediaQuery.of(context).size.height < 700 ? MediaQuery.of(context).size.height * 0.15 : MediaQuery.of(context).size.height * 0.18),
     );
   }
 }

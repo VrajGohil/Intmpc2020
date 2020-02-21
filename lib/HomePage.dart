@@ -141,52 +141,49 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               CustomPage(
-                title: 'How To Enter',
+                title: 'Timeline',
                 imagePath: 'assets/blackBg.png',
                 fontColor: Colors.white,
-                body: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      CustomTextCard(
-                        text: 'Click on Participate Now button on homepage.',
-                        number: '1.',
-                      ),
-                      CustomTextCard(
-                        text: 'Sign-up which you are most comfortable with.',
-                        number: '2.',
-                      ),
-                      CustomTextCard(
-                        text:
-                            'On the dashboard, click on \"Upload\" and submit your entry.',
-                        number: '3.',
-                      ),
-                      CustomTextCard(
-                        text:
-                            'Ensure that you are able to see your entry on your dashboard.',
-                        number: '4.',
-                      ),
-                      CustomTextCard(
-                        text:
-                            'You can submit total 3 entries so don\'t forget to utilise all three entries.',
-                        number: '5.',
-                      ),
-                      CustomTextCard(
-                        text:
-                            'Sit back and chill while we evaluate your entries.',
-                        number: '6.',
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: SelectableText(
-                          'IF YOU STILL FACE ANY DIFFICULTY TO ENTER THE CONTEST, MAIL US AT contact@intmpc2020.co AND WE WILL BE HAPPY TO ASSIST YOU.',
-                          style:
-                              TextStyle(fontFamily: 'George', fontSize: 12.0),
-                          textAlign: TextAlign.center,
+                body: Stack(
+                  children: <Widget>[
+                    Align(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          color: Colors.grey.withOpacity(0.5),
+                          width: 4.0,
+                          height: MediaQuery.of(context).size.height * 0.8,
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                      alignment: Alignment.centerLeft,
+                    ),
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          CustomTextCard(
+                            text: 'Entry Window will remain open from 25th Feb till 10th March',
+                            number: 'Start',
+                          ),
+                          CustomTextCard(
+                            text: 'Best Entries to be shortlisted for the final round.',
+                            number: 'Shortlisting Entries',
+                          ),
+                          CustomTextCard(
+                            text:
+                                'Results are planned to be announced on 17th of March 2020',
+                            number: 'Result Declaration',
+                          ),
+                          CustomTextCard(
+                            text:
+                                'The shipping of the prizes would be done by the sponsoring companies, which could vary for short period of time.',
+                            number: 'Prize Distribution',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
               CustomPage(
@@ -218,7 +215,7 @@ class _HomePageState extends State<HomePage>
                               child: Padding(
                                 padding: const EdgeInsets.all(6.0),
                                 child: Text(
-                                  'We are thrilled to be partnering with some best brands to award the winners of International Macro Photography Contest 2020 some awesome prizes.\n\nAlthough we work hard, a big part of making this possible lies in the hands of our sponsors and partners so we can proudly say that these are the companies that make everything possible.If you\'re interested in sponsoring alongside these companies, please get in touch with us!',
+                                  'We are thrilled to be partnering with some best brands to award the winners of International Macro Photography Contest 2020 some awesome prizes.\n\nAlthough we work hard, a big part of making this possible lies in the hands of our sponsors and partners so we can proudly say that these are the companies that make everything possible. Please do take time and visit all the companies below.',
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -228,42 +225,43 @@ class _HomePageState extends State<HomePage>
                             ),
                           )),
                     ),
+                    SizedBox(height: 16.0,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Company(
-                          network:
-                              'https://i.ibb.co/vvzFLwj/20200216-161353-0000.png',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/sand.png?alt=media&token=89dc715e-3eef-4759-ad71-7ff190aef6a9',
                           onTap: () => _launchURL(
-                              'https://www.shopmoment.com/'),
+                              'https://www.sandmarc.com/'),
                         ),
                         Company(
                           network:
-                          'https://i.ibb.co/DkpmVSg/20200216-161900-0000.png',
+                          'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/heli.png?alt=media&token=38952f3e-a8e8-4752-a4d2-76ff3bda7515',
                           onTap: () => _launchURL(
                               'https://www.heliconsoft.com/'),
                         ),
                       ],
                     ),
+                    Company(
+                      network:
+                      'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/moment.png?alt=media&token=8f1f48f4-2e13-443e-b581-61c641df59d5',
+                      onTap: () => _launchURL(
+                          'https://www.shopmoment.com/'),
+                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Company(
-                          network: 'https://i.ibb.co/nkJtySy/20200216-161648-0000.png',
-                          onTap: () => _launchURL(
-                              'https://www.sandmarc.com/'),
-                        ),
-                        Company(
-                          network: 'https://i.ibb.co/qCq7fH1/20200216-161434-0000.png',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/on1.png?alt=media&token=ace9df9c-e309-4a85-a4a3-be990b4a7f62',
                           onTap: () => _launchURL(
                               'https://www.on1.com/'),
                         ),
+                        Company(
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/guild.png?alt=media&token=3a7dad51-6e40-4d31-8430-2df9d2de5907',
+                          onTap: () => _launchURL(
+                              'https://photoguild.co.uk/'),
+                        ),
                       ],
-                    ),
-                    Company(
-                      network: 'https://i.ibb.co/7YQ7h5W/20200216-161615-0000.png',
-                      onTap: () => _launchURL(
-                          'https://photoguild.co.uk/'),
                     ),
                   ],
                 ),
@@ -278,18 +276,15 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-//                          address: 'assets/alina.jpg',
-                          network: 'https://i.ibb.co/tqzXGbH/alina.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/alina.jpg?alt=media&token=34db8a14-a027-4d8f-a39a-b4b19db04b1d',
                           name: 'Alina Dotsenko',
                         ),
                         CircleDp(
-//                          address: 'assets/muhammad.jpg',
-                          network: 'https://i.ibb.co/0njyfbw/muhammad.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/muhammad.jpg?alt=media&token=bd5e94a8-1c83-44e4-a042-dbb3285544c6',
                           name: 'Muhammad Otib',
                         ),
                         CircleDp(
-//                          address: 'assets/tapan.jpg',
-                          network: 'https://i.ibb.co/TL7zDft/tapan.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/tapan.jpg?alt=media&token=26ced153-957f-4df2-85e4-43ed79e8e724',
                           name: 'Tapan Sheth',
                         ),
                       ],
@@ -297,23 +292,19 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-//                          address: 'assets/bill.jpg',
-                          network: 'https://i.ibb.co/TrpbWjP/bill.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/bill.jpg?alt=media&token=6c999451-cf0e-4942-b1da-4cceff574ade',
                           name: 'Dr. Bill Chu',
                         ),
                         CircleDp(
-//                          address: 'assets/peter.jpg',
-                          network: 'https://i.ibb.co/H71xkp6/peter.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/peter.jpg?alt=media&token=3c0ab11e-0b07-419d-a080-f2f53699a64b',
                           name: 'Peter Wyss',
                         ),
                         CircleDp(
-//                          address: 'assets/thamaphon.jpg',
-                          network: 'https://i.ibb.co/8B3BnG6/thamaphon.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/thamaphon.jpg?alt=media&token=d62f086a-2378-4ca0-938b-b227de3d16ce',
                           name: 'Thamaphon Suwankosai',
                         ),
                         CircleDp(
-//                          address: 'assets/yan.jpg',
-                          network: 'https://i.ibb.co/TLRfT5h/yan.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/yan.jpg?alt=media&token=b6a1c2d3-d3aa-40ab-afd1-41fd5a767915',
                           name: 'Yan Hidayat',
                         ),
                       ],
@@ -321,18 +312,15 @@ class _HomePageState extends State<HomePage>
                     Column(
                       children: <Widget>[
                         CircleDp(
-//                          address: 'assets/karen.jpg',
-                          network: 'https://i.ibb.co/6Hxm7qt/karen.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/karen.jpg?alt=media&token=b3cd5272-daf2-49a8-bcd5-5b2786c9ee9e',
                           name: 'Karen Brewer',
                         ),
                         CircleDp(
-//                          address: 'assets/raj.jpg',
-                          network: 'https://i.ibb.co/qgTy4XQ/raj.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/raj.jpg?alt=media&token=7cfa6427-dfda-4dba-8a99-938f2051e834',
                           name: 'Raj Bheda',
                         ),
                         CircleDp(
-//                          address: 'assets/vraj.jpg',
-                          network: 'https://i.ibb.co/SRzXZrv/vraj.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/vraj.jpg?alt=media&token=2f4e5383-3de8-44a2-93aa-ac7cc0339783',
                           name: 'Vraj Gohil',
                         ),
                       ],
@@ -377,7 +365,7 @@ class _HomePageState extends State<HomePage>
                     Container(
                       child: InkWell(
                         child: Image.network(
-                          'https://i.ibb.co/1RnsL0j/intmpc2018.png',
+                          'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/intmpc2018.png?alt=media&token=1242417b-3bda-4a00-9bbd-938dfd187917',
                           loadingBuilder: (context, child, progress) {
                             return progress == null
                                 ? child
@@ -408,17 +396,17 @@ class _HomePageState extends State<HomePage>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         CircleDp(
-                          network: 'https://i.ibb.co/86NDp3D/entry1.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/entry1.jpg?alt=media&token=6bfe9f5a-f78c-4be0-9530-e2a71c6b4d66',
                           name: 'Angela Manalili',
                           color: Colors.white,
                         ),
                         CircleDp(
-                          network: 'https://i.ibb.co/cLQ01Kv/entry2.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/entry2.jpg?alt=media&token=e2e347e3-38a0-4261-8ad8-9f82155a5cf4',
                           name: 'Alina Dotsenko',
                           color: Colors.white,
                         ),
                         CircleDp(
-                          network: 'https://i.ibb.co/sKpmdry/entry3.jpg',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/entry3.jpg?alt=media&token=5f437fa3-d0a0-4213-a334-bd30cd6f3767',
                           name: 'Priyank Dhami',
                           color: Colors.white,
                         ),
@@ -467,7 +455,7 @@ class _HomePageState extends State<HomePage>
                       onTap: () => _controller.animateToPage(1,
                           duration: Duration(seconds: 2), curve: Curves.linear),
                       child: Text(
-                        'How to enter',
+                        'Timeline',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: fontSize,
@@ -491,7 +479,7 @@ class _HomePageState extends State<HomePage>
                       onTap: () => _controller.animateToPage(3,
                           duration: Duration(seconds: 2), curve: Curves.linear),
                       child: Text(
-                        'Sponsor spot',
+                        'Sponsors',
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: fontSize,
