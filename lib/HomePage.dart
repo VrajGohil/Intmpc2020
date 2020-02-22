@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage>
           PageView(
             controller: _controller,
             physics: ClampingScrollPhysics(),
+            pageSnapping: false,
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(

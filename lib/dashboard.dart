@@ -30,6 +30,8 @@ class _DashboardState extends State<Dashboard> {
   String url = 'https://i.ibb.co/0sd5hdb/b457fb8d2496.png';
   String base64Image;
   DateTime _currentTime = DateTime.now();
+  String userId;
+  String urlFirebase;
 
   @override
   void initState() {
@@ -77,14 +79,25 @@ class _DashboardState extends State<Dashboard> {
       print(res.statusCode);
       print(res.body);
       Map body = jsonDecode(res.body);
+
+      //for firebase storage
+      fb.StorageReference ref;
+      ref = fb.storage().ref('images/$userId$entries');
+      var uploadTask = ref.putString(base64Image, 'base64');
+      uploadTask.onStateChanged.listen((e) {
+        print('Transfered ${e.bytesTransferred}/${e.totalBytes}...');
+      });
+
+      //end here
       setState(() {
         entries--;
         url = body['data']['display_url'];
+        urlFirebase = 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/images%2F$userId${entries+1}?alt=media';
       });
       await fb
           .firestore()
           .collection('images')
-          .add({'url': url, 'user': userEmail, 'likes': 0, 'score': 0});
+          .add({'url': url, 'user': userEmail, 'likes': 0, 'score': 0,'urlFirebase': urlFirebase});
       print(url);
       await fb.firestore().collection('users').doc(userEmail).update(
         data: {'entries': entries},
@@ -152,6 +165,7 @@ class _DashboardState extends State<Dashboard> {
   Future<void> getUserName() async {
     FirebaseAuth _auth = FirebaseAuth.instance;
     userEmail = (await _auth.currentUser()).email;
+    userId = (await _auth.currentUser()).uid;
     data = await fb
         .firestore()
         .collection('users')
@@ -256,7 +270,7 @@ class _DashboardState extends State<Dashboard> {
                               children: <Widget>[
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    "https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/$userImage.png?alt=media",
+                                   "https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/$userImage.png?alt=media",
                                   ),
                                   radius: 30.0,
                                 ),
@@ -466,7 +480,9 @@ class _DashboardState extends State<Dashboard> {
                               }
                               final url = snapshot.data.docs;
                               url.forEach((data) {
-                                final urlText = data.data()['url'];
+                                //Todo uncomment below to use imgbb
+                               // final urlText = data.data()['url'];
+                                final urlText = data.data()['urlFirebase'];
                                 final urlWidget = Container(
                                   margin: EdgeInsets.all(12.0),
                                   width: 110,

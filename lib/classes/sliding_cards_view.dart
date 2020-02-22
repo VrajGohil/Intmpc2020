@@ -54,34 +54,34 @@ class _SlidingCardsViewState extends State<SlidingCardsView> {
       ),
       SlidingCard(
           name:
-              '\$200 Credit at shopmoment.co and Helicon Focus Pro lifetime license worth \$200',
+              '\$200 Credit at shopmoment.co and Helicon Focus Pro lifetime license worth \$200.',
           network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_2.png?alt=media&token=193a4b07-fc36-423e-b7c7-4b7517d64227',
           offset: pageOffset - 1,
           rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank2.png?alt=media&token=a0e5aa2a-d148-465b-9b5b-3a366c766ce4'),
       SlidingCard(
         name:
-            'Macro lens from Sandmarc and Helicon Focus Pro lifetime license worth \$200',
+            'Macro lens from Sandmarc and Helicon Focus Pro lifetime license worth \$200.',
         network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_3.png?alt=media&token=095b8037-d663-4f9a-8874-63f61c2e27eb',
         offset: pageOffset - 2,
         rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank3.png?alt=media&token=9a74de3c-4f44-4f26-899c-7af4b1e63d2b',
       ),
       SlidingCard(
         name:
-        'Helicon Focus Pro lifetime license worth \$200 for the most active participent of the event',
+        'Helicon Focus Pro lifetime license worth \$200.',
         network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_4_5.jpeg?alt=media&token=ad4ee802-4c75-4a9d-9551-b2e6a748ae56',
         offset: pageOffset - 3,
         rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank4.png?alt=media&token=c40136ce-e530-4458-b7da-38c218a38b53',
       ),
       SlidingCard(
         name:
-        'Helicon Focus Pro lifetime license worth \$200',
+        'Helicon Focus Pro lifetime license worth \$200.',
         network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/prize_4_5.jpeg?alt=media&token=ad4ee802-4c75-4a9d-9551-b2e6a748ae56',
         offset: pageOffset - 4,
         rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/rank5.png?alt=media&token=c298c9d3-a1fb-4dca-b20b-bd609c29e9b9',
       ),
       SlidingCard(
         name:
-        'ON1 Photo Raw 2020 worth \$100',
+        'ON1 Photo Raw 2020 worth \$100 for the most active participent of the event.',
         network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/bonus_prize.jpeg?alt=media&token=662bf0a7-663c-4b53-861a-5eca2521b98c',
         offset: pageOffset - 5,
         rank: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/bonus.png?alt=media&token=cce8821d-0e66-4fbb-9f5a-5dc046edd097',
