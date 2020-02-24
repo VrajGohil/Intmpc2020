@@ -9,6 +9,8 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'jury.dart';
+
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
 
@@ -52,6 +54,8 @@ class _LoginPageState extends State<LoginPage>
   String newEmail;
   String newPassword;
   String newConfirmationPassword;
+
+  List<String> juryList = ['test@gmail.com','alina@intmpc2020.co','bill@intmpc2020.co','karen@intmpc2020.co','otib@intmpc2020.co','peter@intmpc2020.co','raj@intmpc2020.co','tapan@intmpc2020.co','suwankosai@intmpc2020.co','vraj@intmpc2020.co','yan@intmpc2020.co'];
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -336,7 +340,17 @@ class _LoginPageState extends State<LoginPage>
                                   email: loginEmail, password: loginPassword))
                               .user;
                       if (user.email != null) {
-                        Navigator.pushNamed(context, '/dashboard');
+                        if(juryList.contains(user.email)){
+                          print('Is jury');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Jury(email: user.email,juryList: juryList,)),
+                          );
+                        }
+                        else{
+                          print('Not jury');
+                          Navigator.pushNamed(context, '/dashboard');
+                        }
                       }
                       setState(() {
                         isLoading = false;

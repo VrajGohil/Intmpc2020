@@ -5,6 +5,7 @@ import 'package:intmpc/HomePage.dart';
 import 'package:intmpc/rules.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'dashboard.dart';
+import 'jury.dart';
 import 'login_page.dart';
 
 void main() {

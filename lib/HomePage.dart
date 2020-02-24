@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage>
       ),
     );
 
-    final fontSize = MediaQuery.of(context).size.height <= 600.0
+    final fontSize = MediaQuery.of(context).size.height <= 700.0
         ? MediaQuery.of(context).size.height * 0.03
         : 32.0;
 
@@ -504,7 +504,7 @@ class _HomePageState extends State<HomePage>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          height: 150.0,
+                          height: 100.0,
                           width: 90.0,
                           child: IconButton(
                             icon: Icon(
@@ -517,7 +517,7 @@ class _HomePageState extends State<HomePage>
                           ),
                         ),
                         Container(
-                          height: 150.0,
+                          height: 100.0,
                           width: 90.0,
                           child: IconButton(
                             icon: Icon(
@@ -530,7 +530,7 @@ class _HomePageState extends State<HomePage>
                           ),
                         ),
                         Container(
-                          height: 150.0,
+                          height: 100.0,
                           width: 90.0,
                           child: IconButton(
                             icon: Icon(
@@ -544,7 +544,42 @@ class _HomePageState extends State<HomePage>
                         ),
                       ],
                     ),
-                    FractionallySizedBox(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () => _launchURL('https://photocontestguru.com'),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width < 500 ? MediaQuery.of(context).size.width * 0.35 : 180.0,
+                              child: Image.network('https://photocontestguru.com/wp-content/uploads/2015/07/photo_contest_guru_listed_1.png'),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 4.0,),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                            onTap: () => _launchURL('https://photocontestdeadlines.com'),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width < 500 ? MediaQuery.of(context).size.width * 0.35 : 180.0,
+                              child: Image.network('https://www.photocontestinsider.com/img/pclogo2001.gif'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () => _launchURL('https://www.photocontestinsider.com'),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width < 500 ? MediaQuery.of(context).size.width * 0.35 : 180.0,
+                          child: Image.network('https://photocontestdeadlines.com/wp-content/uploads/2017/02/photocontest_deadlines_1.png'),
+                        ),
+                      ),
+                    ),
                     SelectableText(
                       'Privacy Policy',
                       style: _greyText,
