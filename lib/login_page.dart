@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage>
   String newPassword;
   String newConfirmationPassword;
 
-  List<String> juryList = ['test@gmail.com','alina@intmpc2020.co','bill@intmpc2020.co','karen@intmpc2020.co','otib@intmpc2020.co','peter@intmpc2020.co','raj@intmpc2020.co','tapan@intmpc2020.co','suwankosai@intmpc2020.co','vraj@intmpc2020.co','yan@intmpc2020.co'];
+  List<String> juryList = ['alina@intmpc2020.co','bill@intmpc2020.co','karen@intmpc2020.co','o_angela@intmpc2020.co','peter@intmpc2020.co','raj@intmpc2020.co','tapan@intmpc2020.co','suwankosai@intmpc2020.co','vraj@intmpc2020.co','y_priyank@intmpc2020.co'];
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -680,7 +680,7 @@ class _LoginPageState extends State<LoginPage>
                             await fb
                                 .firestore()
                                 .collection('users')
-                                .doc(newEmail)
+                                .doc(newEmail.toLowerCase())
                                 .set({
                               'name': newName,
                               'entries': 3,

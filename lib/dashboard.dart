@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intmpc/circular_indicator.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:transparent_image/transparent_image.dart';
 import 'classes/countdown.dart';
 import 'classes/custom_button.dart';
 import 'package:firebase/firebase.dart' as fb;
@@ -36,24 +37,23 @@ class _DashboardState extends State<Dashboard> {
   bool isLoading = false;
 
   List<String> juryList = [
-    'test@gmail.com',
     'alina@intmpc2020.co',
     'bill@intmpc2020.co',
     'karen@intmpc2020.co',
-    'otib@intmpc2020.co',
+    'o_angela@intmpc2020.co',
     'peter@intmpc2020.co',
     'raj@intmpc2020.co',
     'tapan@intmpc2020.co',
     'suwankosai@intmpc2020.co',
     'vraj@intmpc2020.co',
-    'yan@intmpc2020.co'
+    'y_priyank@intmpc2020.co'
   ];
 
   @override
   void initState() {
     getUserName();
     print(userName);
-    streamTest();
+    //streamTest();
     super.initState();
   }
 
@@ -65,16 +65,16 @@ class _DashboardState extends State<Dashboard> {
       _currentTime = DateTime.parse(jsonDecode(response.body)['utc_datetime']);
     });
     print(_currentTime);
-    await fb
-        .firestore()
-        .collection('images')
-        .where('user', '==', 'google.com')
-        .onSnapshot
-        .forEach((snapshot) {
-      snapshot.docs.forEach((data) {
-        print(data.data());
-      });
-    });
+//    await fb
+//        .firestore()
+//        .collection('images')
+//        .where('user', '==', 'google.com')
+//        .onSnapshot
+//        .forEach((snapshot) {
+//      snapshot.docs.forEach((data) {
+//        print(data.data());
+//      });
+//    });
   }
 
   Future<void> getImage() async {
@@ -289,9 +289,9 @@ class _DashboardState extends State<Dashboard> {
 //      DateTime.parse('2020-01-11 12:13:00.00'),
 //    );
     print(difference);
-    return -difference.inSeconds > 0
+    return /*-difference.inSeconds > 0
         ? _countdownTimer(-difference)
-        :
+        :*/
         Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -379,7 +379,7 @@ class _DashboardState extends State<Dashboard> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
                                   Tips(
-                                    name: '- Angela Manalil\n1st ranker (2018)',
+                                    name: '- Angela Manalili\n1st ranker (2018)',
                                     network:
                                         'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/angmana.jpg?alt=media&token=2735a809-2959-439c-9419-88b575512078',
                                     text:
@@ -443,14 +443,14 @@ class _DashboardState extends State<Dashboard> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CustomButton(
-                      text: 'Upload',
-                      tag: 'button1',
-                      method: () async {
-                        await getImage();
-                        uploadImage();
-                      },
-                    ),
+//                    CustomButton(
+//                      text: 'Upload',
+//                      tag: 'button1',
+//                      method: () async {
+//                        await getImage();
+//                        uploadImage();
+//                      },
+//                    ),
                     SizedBox(
                       width: 8.0,
                     ),
@@ -567,24 +567,35 @@ class _DashboardState extends State<Dashboard> {
                             margin: EdgeInsets.all(12.0),
                             width: 110,
                             height: 110,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(16.0),
-                              child: Image.network(
-                                urlText,
-                                fit: BoxFit.fill,
-                                loadingBuilder: (context, child, progress) {
-                                  return progress == null
-                                      ? child
-                                      : Center(
-                                          child: LinearProgressIndicator(
-                                            value:
-                                                progress.cumulativeBytesLoaded /
-                                                    progress.expectedTotalBytes,
-                                          ),
-                                        );
-                                },
-                              ),
+                            child: Stack(
+                              children: <Widget>[
+                                Center(child: CircularProgressIndicator()),
+                                Center(
+                                  child: FadeInImage.memoryNetwork(
+                                    placeholder: kTransparentImage,
+                                    image: urlText,
+                                  ),
+                                ),
+                              ],
                             ),
+//                            child: ClipRRect(
+//                              borderRadius: BorderRadius.circular(16.0),
+//                              child: Image.network(
+//                                urlText,
+//                                fit: BoxFit.fill,
+//                                loadingBuilder: (context, child, progress) {
+//                                  return progress == null
+//                                      ? child
+//                                      : Center(
+//                                          child: LinearProgressIndicator(
+//                                            value:
+//                                                progress.cumulativeBytesLoaded /
+//                                                    progress.expectedTotalBytes,
+//                                          ),
+//                                        );
+//                                },
+//                              ),
+//                            ),
                           );
                           urlWidgets.add(urlWidget);
                         });
@@ -600,7 +611,7 @@ class _DashboardState extends State<Dashboard> {
                   padding: const EdgeInsets.all(20.0),
                   child: Container(
                     child: Text(
-                      'Please refresh this page if you don\'t see your entries after submission.',
+                      'Results will be announced on 17th March, stay tuned!',
                       style: TextStyle(
                         color: Colors.black,
                         fontFamily: 'George',

@@ -281,8 +281,8 @@ class _HomePageState extends State<HomePage>
                           name: 'Alina Dotsenko',
                         ),
                         CircleDp(
-                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/muhammad.jpg?alt=media&token=bd5e94a8-1c83-44e4-a042-dbb3285544c6',
-                          name: 'Muhammad Otib',
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/dhami.jpeg?alt=media&token=5b0e345a-9c4a-4001-9672-7759e71712ad',
+                          name: 'Priyank Dhami',
                         ),
                         CircleDp(
                           network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/tapan.jpg?alt=media&token=26ced153-957f-4df2-85e4-43ed79e8e724',
@@ -292,6 +292,10 @@ class _HomePageState extends State<HomePage>
                     ),
                     Column(
                       children: <Widget>[
+                        CircleDp(
+                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/angmana.jpg?alt=media&token=2735a809-2959-439c-9419-88b575512078',
+                          name: 'Angela Manalili',
+                        ),
                         CircleDp(
                           network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/bill.jpg?alt=media&token=6c999451-cf0e-4942-b1da-4cceff574ade',
                           name: 'Dr. Bill Chu',
@@ -303,10 +307,6 @@ class _HomePageState extends State<HomePage>
                         CircleDp(
                           network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/thamaphon.jpg?alt=media&token=d62f086a-2378-4ca0-938b-b227de3d16ce',
                           name: 'Thamaphon Suwankosai',
-                        ),
-                        CircleDp(
-                          network: 'https://firebasestorage.googleapis.com/v0/b/intmpc2020.appspot.com/o/yan.jpg?alt=media&token=b6a1c2d3-d3aa-40ab-afd1-41fd5a767915',
-                          name: 'Yan Hidayat',
                         ),
                       ],
                     ),
